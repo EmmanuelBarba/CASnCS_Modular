@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+/* Reglas para cuerpo */
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Open+Sans', sans-serif;
+    /* color: azure; */
+}
+/* Resposive */
+/* #form-wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+form {
+	width: 90%;
+	max-width: 500px;
+	#form-title {
+		margin-top: 0;
+		font-weight: 400;
+		text-align: center;
+	} */
+/* Tamaño de la imagen */
+img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+/* Tamaño del Contenedor */
+.side{
+    height: 100%;
+}
+/* Contenedor de slide uno */
+.container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: all;
+    background: #000;
+}
+ /* ul de contenedor slide */
+ul{
+    margin: -0 -0 40px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;/* justificacion de contenido */
+    align-items: flex-end;
+}
+/* Posición de la lista */
+ul li{
+    list-style: none;
+    margin: 10px -3px;
+}
+/* Animación de transición */
+ul li .slide{
+    /* background-size: cover;  */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform .4s;
+    transform: rotateY(90deg);
+    transform-origin: left;
+}
+/* Posición del slide */
+ul li input[type="radio"]{
+    position: relative;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+/* Fin de animacion slide en derecha*/
+ul li input[type="radio"]:checked ~ .slide{
+    transition: transform .4s;
+    transform: rotateY(0deg);
+    transform-origin: right;
+}
+/* Contenedor principal */
+ul li .slide .all_content{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+/* Contenido del contenedor unico */
+ul li .slide .single_content{
+    /* display: flex;
+    flex-wrap: wrap; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-left: rgba(255, 255, 255, 0.5) solid;
+    border-bottom: rgba(255, 255, 255, .5) solid;
+    background-color: rgba(0, 0, 0, .5);
+    padding: 15px;
+    color: white;
+}
+/* Contenido del titulo */
+ul li .slide .single_content h1{
+    text-align: center;
+    font-size: 40px;
+}
+/* Contenido del texto */
+ul li .slide .single_content p{
+    text-align: center;
+    font-size: 25px;
+}
+/* Asercamiento de la imagen */
+ul li .slide img{
+    /* object-fit: cover;comentar si da fallos */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/* Animación de asercamiento */
+ul li input[type="radio"]:checked ~ .slide img{
+    animation: animate 25s linear infinite;
+}
+/* Duración de la animación por porsentaje de tirmpo*/
+@keyframes animate{
+
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+
+
+
