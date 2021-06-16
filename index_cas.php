@@ -140,7 +140,7 @@ if(isset($_POST['reg'])){
                                         <div class="toggle"></div>
                                         <ul>
                                             <li>
-                                                <a href="#">
+                                                <a href="#lorem" target="_modal">
                                                     <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
                                                     <span class="title">Home</span>
                                                 </a>
@@ -152,7 +152,7 @@ if(isset($_POST['reg'])){
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="#dolorr" target="_modal">
                                                     <span class="icon"><i class="fa fa-comment-o" aria-hidden="true"></i></span>
                                                     <span class="title">Messages</span>
                                                 </a>
@@ -197,16 +197,20 @@ if(isset($_POST['reg'])){
                                 </div>
                             </div>
 
-                            <div class="menu-item">
+                        <a href="#dolorr" target="_modal:open">
+                            <div class="menu-item" href="#dolorr" target="_modal:open">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle2">
                                 <div class="expander">
                                     <label for="sneaky_toggle2">
-                                        <i class="menu-icon fa fa-user" href="#section2"></i>
+                                        
+                                        <i class="menu-icon fa fa-user" href="#dolorr" target="_modal:open"></i>
                                         <span class="menu-text">Profile</span>
                                     </label>
                                 </div>
                             </div>
+                        </a>
 
+                        <a href="#dolorr" target="_modal:open">
                             <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle3">
                                 <div class="expander">
@@ -216,6 +220,7 @@ if(isset($_POST['reg'])){
                                     </label>
                                 </div>
                             </div>
+                        </a>
 
                             <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle4">
@@ -324,10 +329,10 @@ if(isset($_POST['reg'])){
                                     </div>
                                     <div id="dolorr">
                                         <h1 class="modal-title" modally-max_width="250">You still here?!</h1>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Yes I am this lazy.</p>
-                    
+                                        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Yes I am this lazy.</p> -->
+                                        <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9c7656be-7921-441f-b4c9-408a4646b170"></iframe>
                                         <div class="button-wrap">
-                                            <a class="button small modally-close">Close me!</a><a href="#dolor" target="_modal:open" class="button gradient small">Open 3rd one!</a>
+                                            <a class="button small modally-close">Close me!</a><a href="#lorem" target="_modal:open" class="button gradient small">Open 3rd one!</a>
                                         </div>
                                     </div>
 
@@ -492,17 +497,19 @@ if(isset($_POST['reg'])){
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
     <script>
             const navigation = document.querySelector('.navigation');
-            document.querySelector('.toggle').ondblclick = function(){
+            document.querySelector('.toggle').onclick = function(){
                 this.classList.toggle('active'),
                 navigation.classList.toggle('active');
             }
     </script>
+    <!-- ondblclick para dos clicks, onclick para uno, caomentar la navegación si no quieres que se mueva libremente el menú  -->
+
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $( function() {
-          $(".navigation").draggable();
+        //   $(".navigation").draggable();//comentar sino quieres que se mueva libre y se quede fijo
         } );
     </script>
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
@@ -541,6 +548,23 @@ if(isset($_POST['reg'])){
         });
     </script>
 <!-- FIN SCRIPT PARA LA BARRA DE PROGRSO DE LAS ORDENES -->
+
+<!-- SCRIPT PARA EL CHATBOT -->
+    <!-- DIALOGFLOW CON MICRO  -->
+
+        <!-- DESHABILITADO POR EL MOMENTO, SE ENCUENTRA EN MESSAGES(MENÚ PRINCIPAL) -->
+
+    <!-- DIALOGFLOW CHAT BETA -->
+
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        <df-messenger
+        intent="WELCOME"
+        chat-title="C&CS"
+        agent-id="9c7656be-7921-441f-b4c9-408a4646b170"
+        language-code="es"
+        ></df-messenger>
+        
+<!-- FIN SCRIPT PARA EL CHATBOT -->
 
 </html>
 
@@ -1666,5 +1690,35 @@ if(isset($_POST['reg'])){
                 opacity:1;
             }
         }
+
+    button#widgetIcon {
+        background: #42a5f500;
+        background: #42a5f500;
+        border: none;
+        border-radius: 50%;
+        bottom: 0px;
+        /* box-shadow: rgb(0 0 0 / 24%) 1px 4px 15px 0px; */
+        cursor: pointer;
+        height: 105px;
+        position: absolute;
+        right: 0px;
+        width: 22px;
+    }
+
 </style>
 <!-- FIN ESTILO DEL PROGRESS BAR DE LOS SG -->
+ 
+ <!-- STYLE PARA CHATBOT -->
+<style>
+
+    df-messenger {
+        --df-messenger-bot-message: crimson;
+        --df-messenger-button-titlebar-color: rgba(94, 14, 30, 0);
+        --df-messenger-chat-background-color: #380303;
+        --df-messenger-font-color: rgb(255, 255, 255);
+        --df-messenger-send-icon: crimson;
+        --df-messenger-user-message: #2e2e2e;
+    }
+
+</style>
+ <!-- STYLE PARA CHATBOT -->
