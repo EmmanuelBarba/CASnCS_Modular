@@ -137,7 +137,7 @@ if(isset($_POST['reg'])){
                         <!-- MENU CON MIVIMIENTO LIBRE PARA EL RESPONSIVE -->
                                 <nav class="body">
                                     <div class="navigation">
-                                        <div class="toggle"></div>
+                                        <div class="toggle"></div> 
                                         <ul>
                                             <li>
                                                 <a href="#lorem" target="_modal">
@@ -323,16 +323,11 @@ if(isset($_POST['reg'])){
                                         </div>
                                     </section>
 
-                                        <!-- <div class="button-wrap">
-                                            <a class="button small modally-close">Cerrar</a><a href="#dolorr" target="_modal:open" class="button gradient small">Más info...</a>
-                                        </div> -->
                                     </div>
-                                    <div id="dolorr">
-                                        <h1 class="modal-title" modally-max_width="250">You still here?!</h1>
-                                        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Yes I am this lazy.</p> -->
-                                        <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9c7656be-7921-441f-b4c9-408a4646b170"></iframe>
-                                        <div class="button-wrap">
-                                            <a class="button small modally-close">Close me!</a><a href="#lorem" target="_modal:open" class="button gradient small">Open 3rd one!</a>
+                                    <!-- modally-max_width="380" -->
+                                    <div id="dolorr" modally-max_width="323">
+                                        <div class="chatbot">
+                                        <iframe width="278" height="520" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9c7656be-7921-441f-b4c9-408a4646b170"></iframe>
                                         </div>
                                     </div>
 
@@ -494,7 +489,9 @@ if(isset($_POST['reg'])){
             // sectionSelector: 'section'
         });
     </Script>
+
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
+
     <script>
             const navigation = document.querySelector('.navigation');
             document.querySelector('.toggle').onclick = function(){
@@ -502,6 +499,7 @@ if(isset($_POST['reg'])){
                 navigation.classList.toggle('active');
             }
     </script>
+    
     <!-- ondblclick para dos clicks, onclick para uno, caomentar la navegación si no quieres que se mueva libremente el menú  -->
 
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
@@ -729,19 +727,19 @@ if(isset($_POST['reg'])){
 
         .modally{
             background: #2d2d2d;
-        background-color: rgba(45, 45, 45, 0.99);
-        background-position-x: 0%;
-        background-position-y: 0%;
-        background-repeat: repeat;
-        background-attachment: scroll;
-        background-image: none;
-        background-size: auto;
-        background-origin: padding-box;
-        background-clip: border-box;
-        box-shadow: 5px 5px 5px 0 rgba(220, 20, 60, 0.452);
-        border: solid 3px crimson;
-        color: #ffffffa3;
-         }
+            background-color: rgba(45, 45, 45, 0.99);
+            background-position-x: 0%;
+            background-position-y: 0%;
+            background-repeat: repeat;
+            background-attachment: scroll;
+            background-image: none;
+            background-size: auto;
+            background-origin: padding-box;
+            background-clip: border-box;
+            box-shadow: 5px 5px 5px 0 rgba(220, 20, 60, 0.452);
+            border: solid 3px crimson;
+            color: #ffffffa3;
+        }
 
         .banner-text{
             position: absolute;
@@ -1395,7 +1393,7 @@ if(isset($_POST['reg'])){
             background: black;
             transition: width 0.5s, heigth 0.5s;
             transition-delay: 0s,0.75s;
-            z-index: 100000;
+            z-index: 100;
             border-radius: 8px;
             overflow: hidden;
             border: solid 3px #ffffff;
@@ -1713,12 +1711,13 @@ if(isset($_POST['reg'])){
 
     df-messenger {
         --df-messenger-bot-message: crimson;
-        --df-messenger-button-titlebar-color: rgba(94, 14, 30, 0);
-        --df-messenger-chat-background-color: #380303;
-        --df-messenger-font-color: rgb(255, 255, 255);
-        --df-messenger-send-icon: crimson;
-        --df-messenger-user-message: #2e2e2e;
+        --df-messenger-button-titlebar-color: #420404;
+        --df-messenger-chat-background-color: #2e2e2e;
+        --df-messenger-font-color: rgb(255 255 255);
+        --df-messenger-send-icon: #ff0000;
+        --df-messenger-user-message: #420404;
+        --df-messenger-input-box-color: #2e2e2e;
+        --df-messenger-input-font-color: #ffff;
     }
-
 </style>
  <!-- STYLE PARA CHATBOT -->
