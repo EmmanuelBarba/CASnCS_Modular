@@ -559,6 +559,7 @@ if(isset($_POST['reg'])){
         intent="WELCOME"
         chat-title="C&CS"
         agent-id="9c7656be-7921-441f-b4c9-408a4646b170"
+        chat-icon="img/logos/chatbot.png"
         language-code="es"
         ></df-messenger>
         
@@ -1711,13 +1712,24 @@ if(isset($_POST['reg'])){
 
     df-messenger {
         --df-messenger-bot-message: crimson;
-        --df-messenger-button-titlebar-color: #420404;
+        --df-messenger-button-titlebar-color: #2e2e2ebf;
         --df-messenger-chat-background-color: #2e2e2e;
         --df-messenger-font-color: rgb(255 255 255);
         --df-messenger-send-icon: #ff0000;
-        --df-messenger-user-message: #420404;
+        --df-messenger-user-message:  #5d5d5d; /*#420404*/
         --df-messenger-input-box-color: #2e2e2e;
         --df-messenger-input-font-color: #ffff;
     }
+
+    button#widgetIcon .df-chat-icon {
+        height: 50px;
+        left: 1px;
+        opacity: 1;
+        position: absolute;
+        top: 0px;
+        transition: opacity 0.5s;
+        width: 50px;
+    }
+
 </style>
  <!-- STYLE PARA CHATBOT -->
