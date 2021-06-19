@@ -258,10 +258,10 @@ if(isset($_POST['reg'])){
                     <div class="banner-area" id="slick-slide-control00">
                 
                         <!-- PRIMER SECCIÓN  -->
-
+                        <!-- https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/img.01.png -->
                             <div class="sigle-banner, img1"  id="section1">
                                 <br> 
-                                <img src="https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/img.01.png" class="logo" >
+                                <img src="img/logos/img.01.svg" class="logo" >
                                 <div class="line typer">Bienvenido Al Portal De Servicios En Gestión Automotríz.</div>
                                 <div class="banner-text">
                                 <!-- <br><br><br><br><br><br><br><br><br> -->
@@ -450,7 +450,7 @@ if(isset($_POST['reg'])){
 
     <footer>
         <div class="social-bar">
-            <a href="https://www.facebook.com/bittecnologia81" class="icon icon-facebook" target="_blank"></a>
+            <a href="https://www.facebook.com/CASnCS/" class="icon icon-facebook" target="_blank"></a>
             <a href="https://twitter.com/DevCodela" class="icon icon-twitter" target="_blank"></a>
             <a href="https://www.youtube.com/c/devcodela" class="icon icon-youtube" target="_blank"></a>
             <a href="https://www.instagram.com/bit_tecnologia_81b/" class="icon icon-instagram" target="_blank"></a>
@@ -584,7 +584,7 @@ if(isset($_POST['reg'])){
             overflow-x: hidden;
             overflow-y: hidden; 
             height:100%;
-            width:101%;
+            width:100%;
             margin: 0px;
 
         }
@@ -615,7 +615,7 @@ if(isset($_POST['reg'])){
             margin: auto;
             justify-content: center;
             filter: drop-shadow(1px 4px 3px #f03);
-            mix-blend-mode: color-burn;
+            /* mix-blend-mode: color-burn; */
             animation: change 0.5s .03s forwards;
             width: 100%;
             height: 100%;
@@ -623,8 +623,8 @@ if(isset($_POST['reg'])){
             max-height: 445px;
             min-width: 200px;
             min-height: 120px;
-            z-index: 0;
-            position: sticky;
+            z-index: 1;
+            /* position: sticky; */
             display: block;
             margin: auto;
         }
@@ -1240,6 +1240,7 @@ if(isset($_POST['reg'])){
         color: white;
         animation: change 0.5s 0.3s forwards;
         animation: typewriter 4s steps(40) 1s 1 normal both, blinkTextCursor 500ms steps(40) infinite normal;
+        z-index: 1;
     }
     @keyframes typewriter {from { width: 0; }
         to {width: 28em;}
@@ -1733,3 +1734,42 @@ if(isset($_POST['reg'])){
 
 </style>
  <!-- STYLE PARA CHATBOT -->
+
+ <!-- RESPONSIVO -->
+
+ <style>
+
+@media (max-width: 600px) {
+
+  .line {
+        /* display: none; */
+        transform: translate(-50%,-100%);
+    }
+
+    @keyframes typewriter {from { width: 0; }
+        to {width: 10em;}
+     }
+
+  img.logo{
+        width: 97%;
+        height: 100%;
+        max-width: 499px;
+        max-height: 531px;
+    }
+
+    .button.white {
+        transform: translateY(-45%);
+    }
+
+    .wave {
+        bottom: 93%;
+    }
+
+    .slick-dots {
+        bottom: 75px;
+    }
+
+}
+ </style>
+
+  <!-- RESPONSIVO -->
