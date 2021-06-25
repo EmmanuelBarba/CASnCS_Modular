@@ -116,7 +116,7 @@ if(isset($_POST['reg'])){
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="img/logos/img.04.ico">
+        <link rel="icon" href="https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/Engranes.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/CSS/slick.css"> 
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -261,7 +261,7 @@ if(isset($_POST['reg'])){
                         <!-- https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/img.01.png -->
                             <div class="sigle-banner, img1"  id="section1">
                                 <br> 
-                                <img src="img/logos/img.01.svg" class="logo" >
+                                <img src="https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/img.01.svg" class="logo" >
                                 <div class="line typer">Bienvenido Al Portal De Servicios En Gestión Automotríz.</div>
                                 <div class="banner-text">
                                 <!-- <br><br><br><br><br><br><br><br><br> -->
@@ -446,12 +446,13 @@ if(isset($_POST['reg'])){
                     </div>
                 </header>
             <!-- CONTENEDOR PADRE      -->
+            <meta name="viewport" content="width-device-width, initial-scale=1">
     </body>
 
     <footer>
         <div class="social-bar">
             <a href="https://www.facebook.com/CASnCS/" class="icon icon-facebook" target="_blank"></a>
-            <a href="https://twitter.com/DevCodela" class="icon icon-twitter" target="_blank"></a>
+            <a href="http://m.me/CASnCS" class="icon icon-twitter" target="_blank"></a>
             <a href="https://www.youtube.com/c/devcodela" class="icon icon-youtube" target="_blank"></a>
             <a href="https://www.instagram.com/bit_tecnologia_81b/" class="icon icon-instagram" target="_blank"></a>
         </div>
@@ -559,7 +560,7 @@ if(isset($_POST['reg'])){
         intent="WELCOME"
         chat-title="C&CS"
         agent-id="9c7656be-7921-441f-b4c9-408a4646b170"
-        chat-icon="img/logos/chatbot.png"
+        chat-icon="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/Icons/chatbot.png"
         language-code="es"
         ></df-messenger>
         

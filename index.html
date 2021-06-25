@@ -1,32 +1,3 @@
-<?php
-
-require_once 'config/functions.php';
-$conexion = connect($server,$db,$user,$pass);
-if(!$conexion){
-header('location: index.php');
-}
-
-session_start();//crea sesion
-
-//revisa las sesiones
-if(isset($_SESSION['acceso'])){
-    if($_SESSION['permisos']=="admin"){
-        $name=($_SESSION['acceso']);
-    }else{
-        $name=($_SESSION['acceso']);
-    }
-    
-}else{
-    header('Location: index_cas.php');
-}
-
-$state = $conexion->prepare("SELECT id,title,intro,image FROM ".$name."");//se genera la busqueda
-$state ->execute();
-
-$result = $state->fetchAll();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -38,7 +9,7 @@ $result = $state->fetchAll();
         <link rel="stylesheet" href="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/CSS/slick.css"> 
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
-        <!-- EN cASO DE PEDO BORRAR LA LINEA DEBAJO -->
+        <!-- EN CASO DE PEDO BORRAR LA LINEA DEBAJO -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <!-- MODAL DE FORMULARIO -->
         <link rel="stylesheet" href="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/CSS/modal.css">
@@ -54,10 +25,10 @@ $result = $state->fetchAll();
                         <!-- MENU CON MIVIMIENTO LIBRE PARA EL RESPONSIVE -->
                                 <nav class="body">
                                     <div class="navigation">
-                                        <div class="toggle"></div>
+                                        <div class="toggle"></div> 
                                         <ul>
                                             <li>
-                                                <a href="#">
+                                                <a href="#lorem" target="_modal">
                                                     <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
                                                     <span class="title">Home</span>
                                                 </a>
@@ -69,7 +40,7 @@ $result = $state->fetchAll();
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="#dolorr" target="_modal">
                                                     <span class="icon"><i class="fa fa-comment-o" aria-hidden="true"></i></span>
                                                     <span class="title">Messages</span>
                                                 </a>
@@ -102,7 +73,7 @@ $result = $state->fetchAll();
                             <!-- <div class="menu-title">
                                  Admin CAS
                             </div> -->
-                            <?php echo "<div class='menu-title'>$name</div>";?>
+                            <div class='menu-title'>Guess</div>
 
                             <div class="menu-item" href="#dolorr" target="_modal:open">
                                 <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle" href="#dolorr" target="_modal:open">
@@ -114,16 +85,20 @@ $result = $state->fetchAll();
                                 </div>
                             </div>
 
-                            <div class="menu-item">
+                        <a href="#dolorr" target="_modal:open">
+                            <div class="menu-item" href="#dolorr" target="_modal:open">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle2">
                                 <div class="expander">
                                     <label for="sneaky_toggle2">
-                                        <i class="menu-icon fa fa-user" href="#section2"></i>
+                                        
+                                        <i class="menu-icon fa fa-user" href="#dolorr" target="_modal:open"></i>
                                         <span class="menu-text">Profile</span>
                                     </label>
                                 </div>
                             </div>
+                        </a>
 
+                        <a href="#dolorr" target="_modal:open">
                             <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle3">
                                 <div class="expander">
@@ -133,6 +108,7 @@ $result = $state->fetchAll();
                                     </label>
                                 </div>
                             </div>
+                        </a>
 
                             <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle4">
@@ -170,7 +146,7 @@ $result = $state->fetchAll();
                     <div class="banner-area" id="slick-slide-control00">
                 
                         <!-- PRIMER SECCIÓN  -->
-
+                        <!-- https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/img.01.png -->
                             <div class="sigle-banner, img1"  id="section1">
                                 <br> 
                                 <img src="https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/img.01.svg" class="logo" >
@@ -178,21 +154,19 @@ $result = $state->fetchAll();
                                 <div class="banner-text">
                                 <!-- <br><br><br><br><br><br><br><br><br> -->
                                 <br><br><br><br><br><br><br>
-                                <h2>Gestión Automotríz</h2> 
+                                <div class="ghost">Gestión Automotríz</div> 
                                 <br>
-                                <a href="#lorem" target="_modal" class="button white">Logout</a>
+                                <a href="#lorem" target="_modal" class="button white">Logearse</a>
                                     <!-- ONDAS DE ADORNO "WAVE" -->
                                 <div class="wave"></div><div class="wave wave2"></div><div class="wave wave3"></div>
                                 <div class="wav"></div><div class="wav wav2"></div><div class="wav wav3"></div>
                                     <!--  FIN DE ONDAS DE ADORNO "WAVE" -->
-                                <div id="lorem" modally-max_width="300">
-                                    <?php echo "<h1 class='modal-title serif'>$name</h1>";?>
-                                    <p>¿Seguro qué deseas cerrar sesión?</p>
-                                    <p>- ¡Primero guarda tus cambios! -</p>
+                                <div id="lorem" modally-max_width="500">
+                                    <!-- <h1 class="modal-title serif">Bienvenido</h1> -->
 
                                     <!-- Contenedor registro/login  -->
                                         
-                                    <!-- <section class="registro" id="color2">
+                                    <section class="registro" id="color2">
                                         <div class="contenedor-form">
                                         <div class="toggle">
                                             <span> Crear Cuenta</span>
@@ -204,7 +178,7 @@ $result = $state->fetchAll();
                                                 <input type="text"     name="name" placeholder="Usuario" required>
                                                 <input type="password" name="pass" placeholder="Contraseña" required>
                                                 <input type="submit"   name="login" value="Iniciar Sesión">
-                                                <?php //if (isset($error2)){ echo "<p style='color:white;'>Datos no validos</p>";} ?>
+                                                <p style='color:white;'>Datos no validos</p>
                                             </form>
                                             <div class="reset-password">
                                             <a href="#dolorr" target="_modal:open">Olvide mi Contraseña?</a>
@@ -220,38 +194,28 @@ $result = $state->fetchAll();
                                                 
                                                 <input type="email"  name="email" placeholder="Correo Electronico" required>
                                                 
-                                                <input type="text"   name="telefono"  placeholder="Teléfono" required> -->
+                                                <input type="text"   name="telefono"  placeholder="Teléfono" required>
 
                                                 <!-- <input type="text" placeholder="Ciudad" required>] -->
 
-                                                <!-- <input type="text" name="domicilio" placeholder="Domicilio" required>
+                                                <input type="text" name="domicilio" placeholder="Domicilio" required>
                                                 
                                                 <input type="submit"  name="reg" value="Registrarse">
 
-                                                <?php //if (isset($error)){ echo "<label style='color:white;'> El Usuario ya existe</label>";} ?>
+                                                <label style='color:white;'> El Usuario ya existe</label>
                                             </form>
-                                        </div> -->
+                                        </div>
                                         <!-- <div class="reset-password">
                                             <a href="#">Olvide mi Contraseña?</a>
                                         </div> -->
-                                        <!-- </div>
-                                    </section> -->
-
-                                        <div class="button-wrap">
-                                        <?php 
-                                                        echo "<a href='config/logout.php' class='button gradient small'>Logout</a>";
-                                                       
-                                            ?>   
-                                            <!-- <a class="button small modally-close">Cerrar</a> -->
-                                            <!-- <a href="config/close.php" target="_modal:open" class="button gradient small">Logout...</a> -->
                                         </div>
+                                    </section>
+
                                     </div>
-                                    <div id="dolorr">
-                                        <h1 class="modal-title" modally-max_width="250">You still here?!</h1>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Yes I am this lazy.</p>
-                    
-                                        <div class="button-wrap">
-                                            <a class="button small modally-close">Close me!</a><a href="#dolor" target="_modal:open" class="button gradient small">Open 3rd one!</a>
+                                    <!-- modally-max_width="380" -->
+                                    <div id="dolorr" modally-max_width="323">
+                                        <div class="chatbot">
+                                        <iframe width="278" height="520" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9c7656be-7921-441f-b4c9-408a4646b170"></iframe>
                                         </div>
                                     </div>
 
@@ -293,10 +257,49 @@ $result = $state->fetchAll();
                                     <!-- <h2>jaja</h2> -->
                                 </div>
                                 <div class="banner-text">
-                                    <h2>Galeria</h2>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                                    Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
-                                    <p class="banner-btn"><a href="#">Contact US</a></p>
+                                    <h2>Ordenes SG</h2>
+                                    <div class="process-wrapper">
+                                        <div id="progress-bar-container">
+                                            <ul>
+                                                <li class="step step01 active"><div class="step-inner">HOME WORK</div></li>
+                                                <li class="step step02"><div class="step-inner">RESPONSIVE</div></li>
+                                                <li class="step step03"><div class="step-inner">CREATIVE</div></li>
+                                                <li class="step step04"><div class="step-inner">TESTIMONIALS</div></li>
+                                                <li class="step step05"><div class="step-inner">OUR LOCATIONS</div></li>
+                                            </ul>
+                                            
+                                            <div id="line">
+                                                <div id="line-progress"></div>
+                                            </div>
+                                        </div>
+
+                                        <div id="progress-content-section">
+                                            <div class="section-content discovery active">
+                                                <h2>HOME SECTION</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                            
+                                            <div class="section-content strategy">
+                                                <h2>GALLERY SECTION</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                            
+                                            <div class="section-content creative">
+                                                <h2>Creative CREATIONS</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                            
+                                            <div class="section-content production">
+                                                <h2>TESTIMONIALS NOW</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                            
+                                            <div class="section-content analysis">
+                                                <h2>OUR LOCATIONS</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -307,7 +310,7 @@ $result = $state->fetchAll();
                                     <!-- <h2>jaja</h2> -->
                                 </div>
                                 <div class="banner-text">
-                                    <h2>Ordenes SG</h2>
+                                    <h2>Galería</h2>
                                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
                                     Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
                                     <p class="banner-btn"><a href="#">Contact US</a></p>
@@ -336,8 +339,8 @@ $result = $state->fetchAll();
 
     <footer>
         <div class="social-bar">
-            <a href="https://www.facebook.com/bittecnologia81" class="icon icon-facebook" target="_blank"></a>
-            <a href="https://twitter.com/DevCodela" class="icon icon-twitter" target="_blank"></a>
+            <a href="https://www.facebook.com/CASnCS/" class="icon icon-facebook" target="_blank"></a>
+            <a href="http://m.me/CASnCS" class="icon icon-twitter" target="_blank"></a>
             <a href="https://www.youtube.com/c/devcodela" class="icon icon-youtube" target="_blank"></a>
             <a href="https://www.instagram.com/bit_tecnologia_81b/" class="icon icon-instagram" target="_blank"></a>
         </div>
@@ -346,6 +349,7 @@ $result = $state->fetchAll();
 <!-- JAVASCRIPT -->
 
 <!-- <script src="assets/js/jquery-3.1.1.min.js"></script>    -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/JS/main.js"></script> 
     <script type="text/javascript" src="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/JS/jquery.modally.js"></script>
@@ -374,23 +378,63 @@ $result = $state->fetchAll();
             // sectionSelector: 'section'
         });
     </Script>
-    <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
+
+<!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
+
     <script>
             const navigation = document.querySelector('.navigation');
-            document.querySelector('.toggle').ondblclick = function(){
+            document.querySelector('.toggle').onclick = function(){
                 this.classList.toggle('active'),
                 navigation.classList.toggle('active');
             }
-        </script>
-    <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
-        <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-        $( function() {
-          $(".navigation").draggable();
-        } );
-        </script>
+    </script>
+    
+    <!-- ondblclick para dos clicks, onclick para uno, caomentar la navegación si no quieres que se mueva libremente el menú  -->
+
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        //   $(".navigation").draggable();//comentar sino quieres que se mueva libre y se quede fijo
+        } );
+    </script>
+<!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
+
+<!-- SCRIPT PARA LA BARRA DE PROGRESO DE LAS ORDENES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(".step").click( function() {
+            $(this).addClass("active").prevAll().addClass("active");
+            $(this).nextAll().removeClass("active");
+        });
+
+        $(".step01").click( function() {
+            $("#line-progress").css("width", "3%");
+            $(".discovery").addClass("active").siblings().removeClass("active");
+        });
+
+        $(".step02").click( function() {
+            $("#line-progress").css("width", "25%");
+            $(".strategy").addClass("active").siblings().removeClass("active");
+        });
+
+        $(".step03").click( function() {
+            $("#line-progress").css("width", "50%");
+            $(".creative").addClass("active").siblings().removeClass("active");
+        });
+
+        $(".step04").click( function() {
+            $("#line-progress").css("width", "75%");
+            $(".production").addClass("active").siblings().removeClass("active");
+        });
+
+        $(".step05").click( function() {
+            $("#line-progress").css("width", "100%");
+            $(".analysis").addClass("active").siblings().removeClass("active");
+        });
+    </script>
+<!-- FIN SCRIPT PARA LA BARRA DE PROGRSO DE LAS ORDENES -->
 
 <!-- SCRIPT PARA EL CHATBOT -->
     <!-- DIALOGFLOW CON MICRO  -->
@@ -399,7 +443,7 @@ $result = $state->fetchAll();
 
     <!-- DIALOGFLOW CHAT BETA -->
 
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
         <df-messenger
         intent="WELCOME"
         chat-title="C&CS"
@@ -429,7 +473,7 @@ $result = $state->fetchAll();
             overflow-x: hidden;
             overflow-y: hidden; 
             height:100%;
-            width:101%;
+            width:100%;
             margin: 0px;
 
         }
@@ -468,8 +512,8 @@ $result = $state->fetchAll();
             max-height: 445px;
             min-width: 200px;
             min-height: 120px;
-            z-index: 0;
-            position: sticky;
+            z-index: 1;
+            /* position: sticky; */
             display: block;
             margin: auto;
         }
@@ -523,37 +567,6 @@ $result = $state->fetchAll();
             background-size: cover;
             background-attachment: fixed;
             height: 100vh;
-        }
-
-        /* BOTON LOGOUT*/
-
-        .modally .button-wrap {
-            text-align: center;
-            align-items: center;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-
-        .modal-title {
-            letter-spacing: 0px;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            padding: 13px;
-            font-size: 27px;
-            text-decoration-line: underline;
-            color: #ed143d9e;
-        }
-
-        .modally .button-wrap .button {
-            margin-left: 0;
-            transform: translateY(5px);
-        }
-
-        p {
-            text-align: center;
-            transform: translateY( -5px);
-            margin: 0 0 5px;
         }
 
         /* BOTON LOGIN */
@@ -614,8 +627,7 @@ $result = $state->fetchAll();
             background-origin: padding-box;
             background-clip: border-box;
             box-shadow: 5px 5px 5px 0 rgba(220, 20, 60, 0.452);
-            /* border: solid 3px crimson; */
-            text-align: center;
+            border: solid 3px crimson;
             color: #ffffffa3;
         }
 
@@ -630,7 +642,7 @@ $result = $state->fetchAll();
         .banner-text h2{
             font-size: 55px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0);
+            color: rgba(255, 255, 255);
             margin: 0;
             z-index: 4;
             position: sticky;
@@ -638,6 +650,17 @@ $result = $state->fetchAll();
             margin: auto;
             /* filter: drop-shadow(3px 3px 3px #dc143c69); */
         }
+        .ghost{
+            font-size: 55px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0);
+            margin: 0;
+            z-index: 4;
+            position: sticky;
+            display: block;
+            margin: auto; 
+        }
+
 
         .banner-text p{
             color: #fff;
@@ -1106,6 +1129,7 @@ $result = $state->fetchAll();
         color: white;
         animation: change 0.5s 0.3s forwards;
         animation: typewriter 4s steps(40) 1s 1 normal both, blinkTextCursor 500ms steps(40) infinite normal;
+        z-index: 1;
     }
     @keyframes typewriter {from { width: 0; }
         to {width: 28em;}
@@ -1260,7 +1284,7 @@ $result = $state->fetchAll();
             background: black;
             transition: width 0.5s, heigth 0.5s;
             transition-delay: 0s,0.75s;
-            z-index: 100000;
+            z-index: 100;
             border-radius: 8px;
             overflow: hidden;
             border: solid 3px #ffffff;
@@ -1384,29 +1408,257 @@ $result = $state->fetchAll();
 
 </style>
 
- <!-- STYLE PARA CHATBOT -->
- <style>
+<!-- ESTILO DEL PROGRESS BAR DE LOS SG -->
 
-df-messenger {
-    --df-messenger-bot-message: crimson;
-    --df-messenger-button-titlebar-color: #2e2e2ebf;
-    --df-messenger-chat-background-color: #2e2e2e;
-    --df-messenger-font-color: rgb(255 255 255);
-    --df-messenger-send-icon: #ff0000;
-    --df-messenger-user-message:  #5d5d5d; /*#420404*/
-    --df-messenger-input-box-color: #2e2e2e;
-    --df-messenger-input-font-color: #ffff;
-}
+<style>
+        .process-wrapper {
+            margin:auto;
+            max-width:1080px;
+        }
 
-button#widgetIcon .df-chat-icon {
-    height: 50px;
-    left: 1px;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    transition: opacity 0.5s;
-    width: 50px;
-}
+        #progress-bar-container {
+            position:relative;
+            width:90%;
+            margin:auto;
+            height:100px;
+            margin-top:65px;
+        }
+
+        #progress-bar-container ul {
+            padding:0;
+            margin:0;
+            padding-top:15px;
+            z-index:9999;
+            position:absolute;
+            width:100%;
+            margin-top:-40px
+        }
+
+        #progress-bar-container li:before {
+            content:" ";
+            display:block;
+            margin:auto;
+            width:30px;
+            height:30px;
+            border-radius:10px;
+            border:solid 2px crimson;
+            transition:all ease 0.3s;
+            
+        }
+
+        #progress-bar-container li.active:before, #progress-bar-container li:hover:before {
+            border:solid 2px crimson;
+                
+            background: linear-gradient(to right, crimson 0%,#5e0000 100%); 
+            border-radius: 10px;
+        }
+
+        #progress-bar-container li {
+            list-style:none;
+            float:left;
+            width:20%;
+            text-align:center;
+            color:crimson;
+            text-transform:uppercase;
+            font-size:11px;
+            cursor:pointer;
+            font-weight:700;
+            transition:all ease 0.2s;
+            vertical-align:bottom;
+            height:60px;
+            position:relative;
+        }
+
+        #progress-bar-container li .step-inner {
+            position:absolute;
+            width:100%;
+            bottom:0;
+            font-size: 14px;
+        }
+
+        #progress-bar-container li.active, #progress-bar-container li:hover {
+            color:#aa0101;
+        }
+
+        #progress-bar-container li:after {
+            content:" ";
+            display:block;
+            width:8px;
+            height:8px;
+            background:crimson;
+            margin:auto;
+            border:solid 3px #5e0000;
+            /*! border-radius:50%; */
+            margin-top:43px;
+            box-shadow:0 2px 13px -1px crimson;
+            transition:all ease 0.2s;
+            
+            border-radius: 4px;
+            /*! border-color: linear-gradient(to right, crimson 0%,#000000c9 100%); */
+        }
+
+        #progress-bar-container li:hover:after {
+            background:#5e0000;
+        }
+
+        #progress-bar-container li.active:after {
+            background:#5e0000;
+        }
+
+        #progress-bar-container #line {
+            width:80%;
+            margin:auto;
+            background: linear-gradient(to right, black 0%,#dc143c00 100%);
+            height:6px;
+            position:absolute;
+            left:10%;
+            top:57px;
+            z-index:1;
+            border-radius:50px;
+            transition:all ease 0.9s;
+        }
+
+        #progress-bar-container #line-progress {
+            content:" ";
+            width:3%;
+            height:100%;
+            /* background: #207893;	  */
+            background: linear-gradient(to right, #5e0000 0%, crimson 100%); 
+            position:absolute;
+            z-index:2;
+            border-radius:50px;
+            transition:all ease 0.9s;
+        }
+
+        #progress-content-section {
+            
+            width:90%;
+            margin: auto;
+            background: #620909;
+            border-radius: 20px;
+        }
+
+        #progress-content-section .section-content {
+            padding:30px 40px;
+            text-align:center;
+        }
+
+        #progress-content-section .section-content h2 {
+            font-size:17px;
+            text-transform:uppercase;
+            color:#333;
+            letter-spacing:1px;
+        }
+
+        #progress-content-section .section-content p {
+            font-size:16px;
+            line-height:1.8em;
+            color:#777;
+        }
+
+        #progress-content-section .section-content {
+            display:none;
+            animation: FadeInUp 700ms ease 1;
+            animation-fill-mode:forwards;
+            transform:translateY(15px);
+            opacity:0;
+        }
+
+        #progress-content-section .section-content.active {
+            display:block;
+        }
+
+        @keyframes FadeInUp {
+            0% {
+                transform:translateY(15px);
+                opacity:0;
+            }
+            
+            100% {
+                transform:translateY(0px);
+                opacity:1;
+            }
+        }
+
+    button#widgetIcon {
+        background: #42a5f500;
+        background: #42a5f500;
+        border: none;
+        border-radius: 50%;
+        bottom: 0px;
+        /* box-shadow: rgb(0 0 0 / 24%) 1px 4px 15px 0px; */
+        cursor: pointer;
+        height: 105px;
+        position: absolute;
+        right: 0px;
+        width: 22px;
+    }
 
 </style>
-<!-- STYLE PARA CHATBOT -->
+<!-- FIN ESTILO DEL PROGRESS BAR DE LOS SG -->
+ 
+ <!-- STYLE PARA CHATBOT -->
+<style>
+
+    df-messenger {
+        --df-messenger-bot-message: crimson;
+        --df-messenger-button-titlebar-color: #2e2e2ebf;
+        --df-messenger-chat-background-color: #2e2e2e;
+        --df-messenger-font-color: rgb(255 255 255);
+        --df-messenger-send-icon: #ff0000;
+        --df-messenger-user-message:  #5d5d5d; /*#420404*/
+        --df-messenger-input-box-color: #2e2e2e;
+        --df-messenger-input-font-color: #ffff;
+    }
+
+    button#widgetIcon .df-chat-icon {
+        height: 50px;
+        left: 1px;
+        opacity: 1;
+        position: absolute;
+        top: 0px;
+        transition: opacity 0.5s;
+        width: 50px;
+    }
+
+</style>
+ <!-- STYLE PARA CHATBOT -->
+
+ <!-- RESPONSIVO -->
+
+ <style>
+
+@media (max-width: 600px) {
+
+  .line {
+        /* display: none; */
+        transform: translate(-50%,-100%);
+    }
+
+    @keyframes typewriter {from { width: 0; }
+        to {width: 10em;}
+     }
+
+  img.logo{
+        width: 97%;
+        height: 100%;
+        max-width: 499px;
+        max-height: 531px;
+    }
+
+    .button.white {
+        transform: translateY(-45%);
+    }
+
+    .wave {
+        bottom: 93%;
+    }
+
+    .slick-dots {
+        bottom: 75px;
+    }
+
+}
+ </style>
+
+  <!-- RESPONSIVO -->
