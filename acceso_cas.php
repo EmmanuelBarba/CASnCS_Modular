@@ -33,16 +33,16 @@ $result = $state->fetchAll();
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/Engranes.png">
+        <link rel="icon" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Logos/Engranes.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/CSS/slick.css"> 
+        <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/slick.css"> 
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
         <!-- EN cASO DE PEDO BORRAR LA LINEA DEBAJO -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <!-- MODAL DE FORMULARIO -->
-        <link rel="stylesheet" href="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/CSS/modal.css">
-        <link rel="stylesheet" href="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/CSS/jquery.modally.css">
+        <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/modal.css">
+        <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/jquery.modally.css">
         <title>CAS</title>
     </head>
 
@@ -173,7 +173,7 @@ $result = $state->fetchAll();
 
                             <div class="sigle-banner, img1"  id="section1">
                                 <br> 
-                                <img src="https://mod2021cas.s3.amazonaws.com/Images+modular/Logos+CAS/img.01.svg" class="logo" >
+                                <img src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Logos/img.01.svg" class="logo" >
                                 <div class="line typer">Bienvenido Al Portal De Servicios En Gestión Automotríz.</div>
                                 <div class="banner-text">
                                 <!-- <br><br><br><br><br><br><br><br><br> -->
@@ -347,9 +347,9 @@ $result = $state->fetchAll();
 
 <!-- <script src="assets/js/jquery-3.1.1.min.js"></script>    -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/JS/main.js"></script> 
-    <script type="text/javascript" src="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/JS/jquery.modally.js"></script>
-    <script src="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/JS/slick.min.js"></script>
+    <script src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/main.js"></script> 
+    <script type="text/javascript" src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/jquery.modally.js"></script>
+    <script src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/slick.min.js"></script>
 
 <!-- SCRIPT PARA EL MODAL DE FORMULARIO  -->
 
@@ -404,7 +404,7 @@ $result = $state->fetchAll();
         intent="WELCOME"
         chat-title="C&CS"
         agent-id="9c7656be-7921-441f-b4c9-408a4646b170"
-        chat-icon="https://mod2021cas.s3.amazonaws.com/Web/CAS+%26+CAR+SERVICE/Assets/Icons/chatbot.png"
+        chat-icon="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/Icons/chatbot.png"
         language-code="es"
         ></df-messenger>
         
@@ -482,7 +482,7 @@ $result = $state->fetchAll();
         }
          
         .img1 {
-            background-image: linear-gradient(to top, rgb(15, 0, 0) 0%, hsla(0, 0%, 100%, 0.36) 100%), url("https://mod2021cas.s3.amazonaws.com/Images+modular/Images+CAS/img+(17).webp");
+            background-image: linear-gradient(to top, rgb(15, 0, 0) 0%, hsla(0, 0%, 100%, 0.36) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(17).webp");
             /* background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.amazonaws.com/Images+modular/Images+CAS/img+(28).webp"); */
             background-size: cover;
             background-attachment: fixed;
@@ -491,35 +491,35 @@ $result = $state->fetchAll();
         }
 
         .img2{
-            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.amazonaws.com/Images+modular/Images+CAS/img+(15).webp");
+            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(15).webp");
             background-size: cover;
             background-attachment: fixed;
             height: 100vh;
         }
 
         .img3{
-            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.amazonaws.com/Images+modular/Images+CAS/img+(9).webp");
+            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(9).webp");
             background-size: cover;
             background-attachment: fixed;
             height: 100vh;
         }
 
         .img4{
-            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.amazonaws.com/Images+modular/Images+CAS/img+(10).webp");
+            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(10).webp");
             background-size: cover;
             background-attachment: fixed;
             height: 100vh;
         }
 
         .img5{
-            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.amazonaws.com/Images+modular/Images+CAS/img+(14).webp");
+            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(14).webp");
             background-size: cover;
             background-attachment: fixed;
             height: 100vh;
         }
 
         .img6{
-            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.amazonaws.com/Images+modular/Images+CAS/img+(42).webp");
+            background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(42).webp");
             background-size: cover;
             background-attachment: fixed;
             height: 100vh;
@@ -886,11 +886,11 @@ $result = $state->fetchAll();
     
     @font-face {
       font-family: 'icomoon';
-      src:  url('https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.eot');/*https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.eot*/
-      src:  url('https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.eot?i226ha#iefix') format('embedded-opentype'),
-        url('https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.ttf') format('truetype'),/*https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.ttf*/
+      src:  url('https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/Fonts/icomoon.eot');/*https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.eot*/
+      src:  url('https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/Fonts/icomoon.eot?i226ha#iefix') format('embedded-opentype'),
+        url('https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/Fonts/icomoon.ttf') format('truetype'),/*https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.ttf*/
         url('assets/fonts/icomoon.woff?i226ha') format('woff'),/*https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.woff*/
-        url('https://sors7cualtos.s3.amazonaws.com/SOR/icomoon.svg?i226ha#icomoon') format('svg');
+        url('https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/Fonts/icomoon.svg?i226ha#icomoon') format('svg');
       font-weight: normal;
       font-style: normal;
     }
