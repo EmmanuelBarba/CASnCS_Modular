@@ -144,15 +144,17 @@ $result = $state->fetchAll();
                                 </div>
                             </div>
 
-                            <div class="menu-item">
-                                <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle5">
-                                <div class="expander">
-                                    <label for="sneaky_toggle5">
-                                        <i class="menu-icon fa fa-edit"></i>
-                                        <span class="menu-text">Ordenes</span>
-                                    </label>
+                            <a href="#Ordenes_form" target="_modal:open">
+                                <div class="menu-item" href="#Ordenes_form" target="_modal:open">
+                                    <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle5">
+                                    <div class="expander">
+                                        <label for="sneaky_toggle5">
+                                            <i class="menu-icon fa fa-edit"></i>
+                                            <span class="menu-text">Ordenes</span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
 
                             <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle6">
@@ -359,6 +361,7 @@ $result = $state->fetchAll();
             $('#lorem').modally();
             // $('#dolor').modally();
             $('#dolorr').modally();
+            $('#Ordenes_form').modally();
         });
     </script>
 
@@ -374,23 +377,30 @@ $result = $state->fetchAll();
             // sectionSelector: 'section'
         });
     </Script>
-    <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
-    <script>
+
+
+<!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
+
+<script>
             const navigation = document.querySelector('.navigation');
-            document.querySelector('.toggle').ondblclick = function(){
+            document.querySelector('.toggle').onclick = function(){
                 this.classList.toggle('active'),
                 navigation.classList.toggle('active');
             }
-        </script>
-    <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
-        <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-        $( function() {
-          $(".navigation").draggable();
-        } );
-        </script>
+    </script>
+    
+    <!-- ondblclick para dos clicks, onclick para uno, caomentar la navegación si no quieres que se mueva libremente el menú  -->
+
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        //   $(".navigation").draggable();//comentar sino quieres que se mueva libre y se quede fijo
+        } );
+    </script>
+<!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
+
 
 <!-- SCRIPT PARA EL CHATBOT -->
     <!-- DIALOGFLOW CON MICRO  -->

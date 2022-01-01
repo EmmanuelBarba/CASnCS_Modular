@@ -43,7 +43,7 @@ if(isset($_SESSION['acceso'])){
     }
     
 }else{
-    $name="Def_Users";
+    $name="Guess";
 }
 
 //Se verifica si existe el envio de datos. Registro
@@ -126,6 +126,11 @@ if(isset($_POST['reg'])){
         <!-- MODAL DE FORMULARIO -->
         <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/modal.css">
         <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/jquery.modally.css">
+        <!-- APLICACIÓN PARA LA FIRMA  -->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
+        <script src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/jspdf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+         <!--  FIN APLICACIÓN PARA LA FIRMA  -->
         <title>CAS</title>
     </head>
 
@@ -232,15 +237,17 @@ if(isset($_POST['reg'])){
                                 </div>
                             </div>
 
-                            <div class="menu-item">
-                                <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle5">
-                                <div class="expander">
-                                    <label for="sneaky_toggle5">
-                                        <i class="menu-icon fa fa-edit"></i>
-                                        <span class="menu-text">Ordenes</span>
-                                    </label>
+                            <a href="#Ordenes_form" target="_modal:open">
+                                <div class="menu-item" href="#Ordenes_form" target="_modal:open">
+                                    <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle5">
+                                    <div class="expander">
+                                        <label for="sneaky_toggle5">
+                                            <i class="menu-icon fa fa-edit"></i>
+                                            <span class="menu-text">Ordenes</span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
 
                             <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle6">
@@ -329,6 +336,64 @@ if(isset($_POST['reg'])){
                                         <div class="chatbot">
                                         <iframe width="278" height="520" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9c7656be-7921-441f-b4c9-408a4646b170"></iframe>
                                         </div>
+                                    </div>
+
+                                    <div id="Ordenes_form" modally-max_width="500">
+
+                                        <!-- FIN DE FORMULARIO CLIENTES -->  
+                                            <form id="form">
+                                                <div class="mb-3">
+                                                    <label for="curso" class="form-label">Tipo de servicio</label>
+                                                    <select class="form-select" id="curso">
+                                                        <option value="">Seleccione el tipo de servicio</option>
+                                                        <option value="Mantenimiento">Mantenimiento</option>
+                                                        <option value="Revisión">Revisión</option> 
+                                                        <option value="Reparación">Reparación</option> 
+                                                    </select>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <h3>Datos del cliente</h3>
+                                                    <div class="col-md-6">
+                                                        <label for="empresa" class="form-label">Número de orden</label>
+                                                        <input type="text" class="form-control" id="empresa">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="nombre" class="form-label">Nombres del cliente</label>
+                                                        <input type="text" class="form-control" id="nombre">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="apellido" class="form-label">Apellidos del cliente</label>
+                                                        <input type="text" class="form-control" id="apellido">
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Correo electronico del cliente</label>
+                                                    <input type="email" class="form-control" id="email">
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6">
+                                                        <label for="direccion" class="form-label">Direccion del cliente</label>
+                                                        <input type="text" class="form-control" id="direccion">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="telefono" class="form-label">Telefono del cliente</label>
+                                                        <input type="text" class="form-control" id="telefono">
+                                                    </div>
+                                                </div>
+
+                                                <!--Apartado de firma digital y boton de PDF-->
+                                                <span class="d-block pb-2">Firma digital aquí</span>
+                                                <div class="signature mb-2" style="width: 100%; height: 150px;">
+                                                    <canvas id="signature-canvas" style="border: 2px dashed #969696; width: 100%; height: 150px;"></canvas>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary mb-4">Generar orden</button>
+                                            </form>
+
+                                        <!-- FIN DE FORMULARIO CLIENTES -->
+
                                     </div>
 
                                 </div>
@@ -475,10 +540,11 @@ if(isset($_POST['reg'])){
             $('#lorem').modally();
             // $('#dolor').modally();
             $('#dolorr').modally();
+            $('#Ordenes_form').modally();
         });
     </script>
 
-<!-- SCRIPT PARA EL EFECtO DE TRANSICIÓN  -->
+<!-- SCRIPT PARA EL EFECTO DE TRANSICIÓN  -->
 
     <Script>
         $('.banner-area').slick({
@@ -565,6 +631,91 @@ if(isset($_POST['reg'])){
         ></df-messenger>
         
 <!-- FIN SCRIPT PARA EL CHATBOT -->
+
+<!-- SCRIPT PARA GENERAR PDF EN EL FORMULARIO DE CLIENTES -->
+
+    <script>
+                function loadImage(url) { /*Funcion para leer la imagen que usaremos como plantilla en el PDF*/
+                    return new Promise(resolve => {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('GET', url, true);
+                        xhr.responseType = "blob";
+                        xhr.onload = function (e) {
+                            const reader = new FileReader();
+                            reader.onload = function(event) {
+                                const res = event.target.result;
+                                resolve(res);
+                            }
+                            const file = this.response;
+                            reader.readAsDataURL(file);
+                        }
+                        xhr.send();
+                    });
+                }
+
+                let signaturePad = null; /*Iniciar el campo de firma en blanco */
+
+                window.addEventListener('load', async () => { /*Evento para seleccionar y sacar los datos ingresados por el usuario */
+
+                    const canvas = document.querySelector("canvas");
+                    canvas.height = canvas.offsetHeight;
+                    canvas.width = canvas.offsetWidth;
+
+                    signaturePad = new SignaturePad(canvas, {});
+
+                    const form = document.querySelector('#form');
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+
+                        let curso = document.getElementById('curso').value;
+                        let empresa = document.getElementById('empresa').value;
+                        let nombres = document.getElementById('nombre').value;
+                        let apellidos = document.getElementById('apellido').value;
+                        let email = document.getElementById('email').value;
+                        let direccion = document.getElementById('direccion').value;
+                        let telefono = document.getElementById('telefono').value;
+                        generatePDF(curso, empresa, nombres, apellidos, email, direccion, telefono);
+                    })
+
+                });
+
+                async function generatePDF(curso, empresa, nombres, apellidos, email, direccion, telefono) {/*Mandar los datos obtenidos al PDF */
+                    const image = await loadImage("assets/forms/ejemplo.jpg");/*Cargar la imagen */
+                    const signatureImage = signaturePad.toDataURL();/*Obtener la firma como imagen */
+
+                    const pdf = new jsPDF('p', 'pt', 'letter');
+
+                    /*Agregar la imagen de firma al PDF */
+                    pdf.addImage(image, 'PNG', 0, 0, 565, 792);
+                    pdf.addImage(signatureImage, 'PNG', 200, 700, 200, 60);
+
+                    pdf.setFontSize(22);/*Tamaño de letra */
+                    pdf.text(curso, 260, 100);
+
+                    const date = new Date();/*Sacar la fecha */
+                    pdf.text(date.getUTCDate().toString(), 235, 30);
+                    pdf.text((date.getUTCMonth() + 1).toString(), 275, 30);
+                    pdf.text(date.getUTCFullYear().toString(), 320, 30);
+
+                    pdf.setFontSize(22);/*Tamaño de la letra */
+                    /*Acomodo de los datos obtenidos por el formulario*/
+                    pdf.text(nombres, 260, 170); /* (lados, alto) */
+                    pdf.text(empresa, 260, 310)
+                    pdf.text(apellidos, 260, 240);
+                    pdf.text(direccion, 260, 380);
+                    pdf.text(telefono, 260, 450);
+                    pdf.text(email, 260, 520);
+
+                    pdf.setFillColor(0,0,0);
+
+
+                    pdf.save("example.pdf");/*Guardar el PDF */
+
+            }
+
+    </script>
+
+<!-- FIN SCRIPT PARA GENERAR PDF EN EL FORMULARIO DE CLIENTES -->    
 
 </html>
 
@@ -1774,3 +1925,35 @@ if(isset($_POST['reg'])){
  </style>
 
   <!-- RESPONSIVO -->
+
+
+  <!-- ESTILO PARA ELFORMULARIO DE CLIENTE -->
+  <style>
+
+      .form.select{
+        color: black;
+      }
+
+      #curso.form-select{
+          color: black;
+      }
+
+      .btn-primary {
+        color: #fff;
+        border: solid 3px #ffffff;
+        background-color: #2c2c2c;
+        transition: all 0.3s;
+        border-radius: 96px 25px;
+        transform: translate(115%, 30%);
+    }
+
+    .btn-primary:hover{
+        color: black;
+        background-color: #ffff;
+        border-color: crimson;
+        border-radius: 96px 25px;
+        box-shadow: 3px 3px 10px 0 rgb(220 20 60 / 45%);
+    }
+
+  </style>
+<!-- FIN ESTILO PARA ELFORMULARIO DE CLIENTE -->
