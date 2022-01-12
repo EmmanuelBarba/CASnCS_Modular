@@ -14,7 +14,7 @@
         <div class=bloque2>
             <h2>404 Pagina no encontrada</h2>
             <p>¡Vaya! Algo salió mal.<br /><br />Lo sentimos, la pagina que busca no existe o no se pudo encontrar.</p>
-            <a class="b2" href="../galeria.php">Volver</a>
+            <a class="b2" href="../index_cas.php">Volver</a>
             
         </div>  
     </div> 

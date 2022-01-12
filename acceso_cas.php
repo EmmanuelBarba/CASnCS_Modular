@@ -1,30 +1,11 @@
 <?php
 
-require_once 'config/functions.php';
-$conexion = connect($server,$db,$user,$pass);
-if(!$conexion){
-header('location: index.php');
-}
-
-session_start();//crea sesion
-
-//revisa las sesiones
-if(isset($_SESSION['acceso'])){
-    if($_SESSION['permisos']=="admin"){
-        $name=($_SESSION['acceso']);
-    }else{
-        $name=($_SESSION['acceso']);
-    }
-    
-}else{
-    header('Location: index_cas.php');
-}
-
-$state = $conexion->prepare("SELECT id,title,intro,image FROM ".$name."");//se genera la busqueda
-$state ->execute();
-
-$result = $state->fetchAll();
-
+require_once 'config/insert_client.php';
+require_once 'config/insert_orden.php';
+include 'config/form_clientes.php';
+include 'config/form_orden.php';
+// include 'config/editar_clientes.php';
+// include 'config/eliminar_cliente.php';
 ?>
 
 <!DOCTYPE html>
@@ -38,11 +19,16 @@ $result = $state->fetchAll();
         <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/slick.css"> 
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
-        <!-- EN cASO DE PEDO BORRAR LA LINEA DEBAJO -->
+        <!-- EN CASO DE PEDO BORRAR LA LINEA DE ABAJO -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <!-- MODAL DE FORMULARIO -->
         <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/modal.css">
         <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/jquery.modally.css">
+        <!-- APLICACIÓN PARA LA FIRMA  -->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
+        <script src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/jspdf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+         <!--  FIN APLICACIÓN PARA LA FIRMA  -->
         <title>CAS</title>
     </head>
 
@@ -59,38 +45,38 @@ $result = $state->fetchAll();
                                             <li>
                                                 <a href="#">
                                                     <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                                                    <span class="title">Home</span>
+                                                    <span class="title">Principal</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="#Tabla_clientes" target="_modal">
                                                     <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                                                    <span class="title">Profile</span>
+                                                    <span class="title">Clientes</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="#Chat_dialogflow" target="_modal">
                                                     <span class="icon"><i class="fa fa-comment-o" aria-hidden="true"></i></span>
-                                                    <span class="title">Messages</span>
+                                                    <span class="title">Mensajes</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#">
                                                     <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                    <span class="title">Settings</span>
+                                                    <span class="title">Configuración</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="#reset_pass" target="_modal">
                                                     <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                                    <span class="title">Password</span>
+                                                    <span class="title">Contraseña</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
-                                                    <span class="icon"><i class="fa fa-sign-in" aria-hidden="true"></i></span>
-                                                    <span class="title">Sing Out</span>
-                                                </a>
+                                                    <a href="#lorem" target="_modal">
+                                                        <span class="icon"><i class="fa fa-sign-in" aria-hidden="true"></i></span>
+                                                        <span class="title">Cerrar sesión</span>
+                                                    </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -104,7 +90,7 @@ $result = $state->fetchAll();
                             </div> -->
                             <?php echo "<div class='menu-title'>$name</div>";?>
 
-                            <div class="menu-item" href="#dolorr" target="_modal:open">
+                            <!-- <div class="menu-item" href="#dolorr" target="_modal:open">
                                 <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle" href="#dolorr" target="_modal:open">
                                 <div class="expander" href="#dolorr" target="_modal:open">
                                     <label for="sneaky_toggle" href="#dolorr" target="_modal:open">
@@ -112,29 +98,33 @@ $result = $state->fetchAll();
                                         <span class="menu-text" href="#dolorr" target="_modal:open">Inicio</span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="menu-item">
-                                <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle2">
-                                <div class="expander">
-                                    <label for="sneaky_toggle2">
-                                        <i class="menu-icon fa fa-user" href="#section2"></i>
-                                        <span class="menu-text">Profile</span>
-                                    </label>
+                            <a href="Tabla_clientes" target="_modal:open">
+                                <div class="menu-item" href="#Tabla_clientes" target="_modal:open">
+                                    <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle2">
+                                    <div class="expander">
+                                        <label for="sneaky_toggle2">
+                                            <i class="menu-icon fa fa-user" href="#Tabla_clientes" target="_modal:open"></i>
+                                            <span class="menu-text">Clientes</span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
 
-                            <div class="menu-item">
-                                <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle3">
-                                <div class="expander">
-                                    <label for="sneaky_toggle3">
-                                        <i class="menu-icon fa fa-file"></i>
-                                        <span class="menu-text">Servicios</span>
-                                    </label>
+                            <a href="#dolorr" target="_modal:open">
+                                <div class="menu-item">
+                                    <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle3">
+                                    <div class="expander">
+                                        <label for="sneaky_toggle3">
+                                            <i class="menu-icon fa fa-file"></i>
+                                            <span class="menu-text">Agenda</span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
 
-                            <div class="menu-item">
+                            <!-- <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle4">
                                 <div class="expander">
                                     <label for="sneaky_toggle4">
@@ -142,9 +132,9 @@ $result = $state->fetchAll();
                                         <span class="menu-text">Compras</span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <a href="#Ordenes_form" target="_modal:open">
+                            <a href="#Tabla_ordenes" target="_modal:open">
                                 <div class="menu-item" href="#Ordenes_form" target="_modal:open">
                                     <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle5">
                                     <div class="expander">
@@ -175,87 +165,267 @@ $result = $state->fetchAll();
 
                             <div class="sigle-banner, img1"  id="section1">
                                 <br> 
-                                <img src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Logos/img.01.svg" class="logo" >
+                                <img src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Logos/img.01.svg" class="logo">
                                 <div class="line typer">Bienvenido Al Portal De Servicios En Gestión Automotríz.</div>
                                 <div class="banner-text">
-                                <!-- <br><br><br><br><br><br><br><br><br> -->
                                 <br><br><br><br><br><br><br>
-                                <h2>Gestión Automotríz</h2> 
-                                <br>
+
+                                <div class="ghost">Gestión Automotríz</div> <br>
+
                                 <a href="#lorem" target="_modal" class="button white">Logout</a>
-                                    <!-- ONDAS DE ADORNO "WAVE" -->
-                                <div class="wave"></div><div class="wave wave2"></div><div class="wave wave3"></div>
-                                <div class="wav"></div><div class="wav wav2"></div><div class="wav wav3"></div>
-                                    <!--  FIN DE ONDAS DE ADORNO "WAVE" -->
+                                <!-- ONDAS DE ADORNO "WAVE" -->
+                                    <div class="wave"></div><div class="wave wave2"></div><div class="wave wave3"></div>
+                                    <div class="wav"></div><div class="wav wav2"></div><div class="wav wav3"></div>
+                                <!--  FIN DE ONDAS DE ADORNO "WAVE" -->
                                 <div id="lorem" modally-max_width="300">
                                     <?php echo "<h1 class='modal-title serif'>$name</h1>";?>
                                     <p>¿Seguro qué deseas cerrar sesión?</p>
                                     <p>- ¡Primero guarda tus cambios! -</p>
+                                    <div class="button-wrap"><?php echo "<a href='config/logout.php' class='button gradient small'>Logout</a>";?></div>
+                                </div>
 
-                                    <!-- Contenedor registro/login  -->
-                                        
-                                    <!-- <section class="registro" id="color2">
-                                        <div class="contenedor-form">
-                                        <div class="toggle">
-                                            <span> Crear Cuenta</span>
-                                        </div>
-                                        
-                                        <div class="formulario">
-                                            <h2>Iniciar Sesión</h2>
-                                            <form action="#" method="POST">
-                                                <input type="text"     name="name" placeholder="Usuario" required>
-                                                <input type="password" name="pass" placeholder="Contraseña" required>
-                                                <input type="submit"   name="login" value="Iniciar Sesión">
-                                                <?php //if (isset($error2)){ echo "<p style='color:white;'>Datos no validos</p>";} ?>
-                                            </form>
-                                            <div class="reset-password">
-                                            <a href="#dolorr" target="_modal:open">Olvide mi Contraseña?</a>
-                                        </div> 
-                                        </div>
-                                        
-                                        <div class="formulario">
-                                            <h2>Crea tu Cuenta</h2>
-                                            <form action="#" method="POST">
-                                                <input type="text" name="name" placeholder="Usuario Taller" required>
-                                                
-                                                <input type="password" name="pass" placeholder="Contraseña" required>
-                                                
-                                                <input type="email"  name="email" placeholder="Correo Electronico" required>
-                                                
-                                                <input type="text"   name="telefono"  placeholder="Teléfono" required> -->
 
-                                                <!-- <input type="text" placeholder="Ciudad" required>] -->
+                            <!-- TABLA DE CLIENTES -->
 
-                                                <!-- <input type="text" name="domicilio" placeholder="Domicilio" required>
-                                                
-                                                <input type="submit"  name="reg" value="Registrarse">
-
-                                                <?php //if (isset($error)){ echo "<label style='color:white;'> El Usuario ya existe</label>";} ?>
-                                            </form>
-                                        </div> -->
-                                        <!-- <div class="reset-password">
-                                            <a href="#">Olvide mi Contraseña?</a>
-                                        </div> -->
-                                        <!-- </div>
-                                    </section> -->
-
-                                        <div class="button-wrap">
-                                        <?php 
-                                                        echo "<a href='config/logout.php' class='button gradient small'>Logout</a>";
-                                                       
-                                            ?>   
-                                            <!-- <a class="button small modally-close">Cerrar</a> -->
-                                            <!-- <a href="config/close.php" target="_modal:open" class="button gradient small">Logout...</a> -->
-                                        </div>
+                            <div id="Tabla_clientes" class="registro" modally-max_width="950" id="color2">
+                                    <div class="toggle">
+                                        <a href="#Insertar_cliente" target="_modal:open">Registar Cliente</a>
                                     </div>
-                                    <div id="dolorr">
+                                    <h2 class="title_cliente">Lista de clientes</h2><br>
+                                    <div class="contenedor-form-tabla">
+                                        <center>
+                                        <div>
+                                            <form action="#" method="POST">
+                                                <input class="buscar" type="text" name="buscar" id="buscar_css" placeholder="Buscar cliente">
+                                                <button class="btn_buscar" type="submit" name="Buscar" value="Buscar">Buscar</button>
+                                                <br>
+                                            </form><br><br>
+                                        </div>
+                                        <table class="" border="1">
+                                                <tr>
+                                                    <td align="center">ID</td>
+                                                    <td align="center">NOMBRE</td>
+                                                    <td align="center">DOMICILIO</td>
+                                                    <td align="center">CORREO</td>
+                                                    <td align="center">TELEFONO</td>
+                                                    <!-- <td>FECHA</td> -->
+                                                    <td align="center">TALLER</td>
+                                                    <td align="center"><i class="fa fa-cogs"></i></td>
+                                                    <td align="center"><i class="fa fa-user"></i></td>
+                                                    <!-- <td>CONTRASEÑA</td> -->
+                                                    <!-- <td>TIPO DE USUARIO</td> -->
+                                                </tr>
+
+                                                 <?php foreach ($clientes as $dato) { ?>
+                                                        <tr>
+                                                            <td><?php echo $dato->id_clientes; ?></td>
+                                                            <td><?php echo $dato->nombre_cliente; ?></td>
+                                                            <td><?php echo $dato->domicilio_cliente; ?></td>
+                                                            <td><?php echo $dato->correo_cliente; ?></td>
+                                                            <td><?php echo $dato->tel_cliente; ?></td>
+                                                            <!-- <td><?php //echo $dato->date_cliente; ?></td> -->
+                                                            <td><?php echo $dato->taller_hasclient; ?></td>
+                                                            <!-- <td> -->
+                                                            <?php //echo $dato->pass_client; ?>
+                                                            <!-- </td> -->
+                                                            <!-- <td><?php // $dato->type; ?></td> -->
+                                                            <td><a href="config/editar_clientes.php?id=<?php echo $dato->id_clientes; ?>">Editar</a></td>
+                                                            <td><a href="config/eliminar_cliente.php?id=<?php echo $dato->id_clientes; ?>">Eliminar</a></td>
+                                                        </tr>
+                                                    <?php } ?> 
+                                            </table>
+                                        </center>
+                                    </div>
+                                </div>
+
+                            <!-- FIN TABLA DE CLIENTES -->
+
+                            <!-- FORMULARIO DE REGISTRO CLIENTE -->
+
+                            <section id="Insertar_cliente" class="registro" modally-max_width="450">
+                                
+                                    <!-- <div id="Insertar_cliente" modally-max_width="380"> -->
+                                        <form action="#" class="form-register" name="form" method="POST">
+                                            <h2>REGISTRO DE CLIENTE</h2>
+
+                                                    <div>
+                                                        <label for="nombre_cliente" class="form-label">Nombre:</label>
+                                                        <input type="text" name="nombre_cliente" class="form-control" id="nombre_cliente" placeholder="Nombre del cliente" required>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="domicilio_cliente" class="form-label">Domicilio:</label>
+                                                        <input type="text" name="domicilio_cliente" class="form-control" id="domicilio_cliente" placeholder="Domicilio" required>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="correo_cliente" class="form-label">Correo:</label>
+                                                        <input type="email" name="correo_cliente" class="form-control" id="correo_cliente" placeholder="Email" required>
+                                                    </div>
+                                                                                       
+                                                    <div>
+                                                        <label for="tel_cliente" class="form-label">Telefono:</label>
+                                                        <input type="tel" name="tel_cliente" class="form-control" id="tel_cliente" placeholder="Número de telefono" required>
+                                                    </div>
+                                                
+                                                    <div>
+                                                        <label for="pass_client" class="form-label">Contraseña:</label>
+                                                        <input type="text" name="pass_client" class="form-control" id="pass_client" placeholder="Contraseña cliente" required>
+                                                    </div>
+                                                    <br>
+                                                    <td colspan="2"><button class="btn btn-primary" type="submit" name="enviar" >Guardar</button></td>  
+                                        </form>
+                                    <!-- </div> -->
+                                </section>
+
+                                <!-- FORMULARIO ORDENES -->
+
+                                <!-- TABLA DE ordenes -->
+
+                                    <div id="Tabla_ordenes" class="registro" modally-max_width="900" id="color2">
+                                            <div class="toggle">
+                                                <a href="#Insertar_orden" target="_modal:open">Generar orden</a>
+                                            </div>
+                                            <h2 class="title_cliente">Ordenes SG</h2><br>
+                                            <div class="contenedor-form-tabla">
+                                                <center>
+                                                <div>
+                                                    <form action="#" method="POST">
+                                                        <input class="buscar" type="text" name="buscar" id="buscar_css" placeholder="Buscar cliente">
+                                                        <button class="btn_buscar" type="submit" name="Buscar" value="Buscar">Buscar</button>
+                                                        <br>
+                                                    </form><br><br>
+                                                </div>
+                                                <table border="1">
+                                                        <tr>
+                                                            <td align="center" style="margin: 3px">ID SG</td>
+                                                            <td align="center">CLIENTE</td>
+                                                            <td align="center">MODELO</td>
+                                                            <td align="center">PLACAS</td>
+                                                            <td align="center"><i class="fa fa-cogs"></i></td>
+                                                            <td align="center"><i class="fa fa-user"></i></td>
+                                                        </tr>
+
+                                                        <?php
+                                                            foreach ($orden as $dato) {
+                                                                ?>
+                                                                <tr>
+                                                                    <td><?php echo $dato->id_sg; ?></td>
+                                                                    <td><?php echo $dato->client_hasorden; ?></td>
+                                                                    <td><?php echo $dato->modelo_coche; ?></td>
+                                                                    <td><?php echo $dato->placas_coche; ?></td>
+                                                                    <td><a href="config/editar_ordenform.php?id=<?php echo $dato->id_sg; ?>">Actualizar</a></td>
+                                                                    <td><a href="config/eliminar_orden.php?id=<?php echo $dato->id_sg; ?>">Eliminar</a></td>
+                                                                </tr>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                        
+                                                    </table>
+                                                </center>
+                                            </div>
+                                        </div>
+
+                            <!-- FIN TABLA DE ORDENES -->
+
+                            <!-- FORMULARIO ORDENES -->
+
+                                    <section id="Insertar_orden" class="registro" modally-max_width="450">
+                                
+                                        <form action="#" class="form-register" name="form" method="POST">
+                                            <h2>Orden de servicio SG</h2>
+
+                                                    <div>
+                                                        <label for="id_orden" class="form-label">ID cliente:</label>
+                                                        <input type="text" name="id_orden" class="form-control" id="id_orden" placeholder="Número de cliente" required>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="modelo_coche" class="form-label">Datos automóvil:</label>
+                                                        <input type="text" name="modelo_coche" class="form-control" id="modelo_coche" placeholder="Ejemplo: Marca modelo submodelo año" required>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="placas_coche" class="form-label">Placas/Matricula:</label>
+                                                        <input type="text" name="placas_coche" class="form-control" id="placas_coche" placeholder="Ejemplo: JLN-34-87" required>
+                                                    </div>
+                                                                                       
+                                                    <div>
+                                                        <label for="falla_coche" class="form-label">Descripción de la falla:</label>
+                                                        <input type="text" name="falla_coche" class="form-control" id="falla_coche" placeholder="Describe los problemas del auto en esta parte..." required>
+                                                    </div>
+                                                
+                                                    <div>
+                                                        <label for="observaciones_coche" class="form-label">Observaciones:</label>
+                                                        <input type="text" name="observaciones_coche" class="form-control" id="observaciones_coche" placeholder="(Rayones, golpes, objetos, condiciones)" required>
+                                                    </div>
+
+                                                    <!-- <div>
+                                                        <label for="estado_orden" class="form-label">Progreso de la orden:</label>
+                                                        <input type="text" name="estado_orden" class="form-control" id="estado_orden" placeholder="Describe el progreso de la orden..." required>
+                                                    </div> -->
+
+                                                    <!-- <div>
+                                                        <label for="informe_tecnico" class="form-label">Reporte final:</label>
+                                                        <input type="text" name="informe_tecnico" class="form-control" id="informe_tecnico" placeholder="Reporta toda la reparación..." required>
+                                                    </div> -->
+                                                    <br>
+                                                    <td colspan="2"><button class="btn btn-primary" type="submit" name="enviar_orden" >Guardar SG</button></td>  
+                                        </form>
+                                    <!-- </div> -->
+                                </section>
+
+                                <!-- FIN DE FORMULARIO ORDENES -->
+
+                                <!-- FORMULARIO PARA CAMBIAR LA CONTRASEÑA  -->
+
+                                    <div id=reset_pass modally-max_width="370" class="registro" id="color2">
+                                                <form action="#" method="post" >
+
+                                                    <h2>Cambiar contraseña</h2>
+
+                                                     <input class="form-control" type="pass" name="pass" id="pass" placeholder="Ingresa el correo de tu cuenta" required><br>
+                                                        
+                                                    <?php if (isset($error2)){ echo "<label style='color:red'Elcorreo no coincide</label><br>";} ?>
+                                                       
+                                                     <?php if (isset($ok)){ echo "<label style='color:green'>Contraseña actualizada</label><br>";} ?>
+                                                     <input class="form-control" type="password" name="npass" id="npass" placeholder="Nueva Contraseña" required><br>
+
+                                                     <input class="form-control" type="password" id="cpass" placeholder="Repite la contraseña"required><br>
+
+                                                     <div class="alerta" style="display: none;"></div>
+
+                                                     <input type="submit" name="newpass"  class="btn btn-primary" value="cambiar">
+                                                     <!-- <input type="reset" value="Limpiar" class="b1"> -->
+
+                                                </form>
+
+                                        </div>
+                                
+                                <!-- FIN FORMULARIO PARA CAMBIAR LA CONTRASEÑA  -->
+
+                                <!-- VENTANA CHAT DIALOGFLOW CON MICRO -->
+
+                                        <div id="Chat_dialogflow" modally-max_width="370">
+                                                <div class="chatbot">
+                                                    <iframe width="330" height="500" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9c7656be-7921-441f-b4c9-408a4646b170"></iframe>
+                                                </div>
+                                        </div>
+
+                                <!--FIN VENTANA CHAT DIALOGFLOW CON MICRO -->
+                                
+                                <!-- VENTANA PARA LOS WARNINGS -->
+
+                                    <!-- <div id="dolorr">
                                         <h1 class="modal-title" modally-max_width="250">You still here?!</h1>
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Yes I am this lazy.</p>
                     
                                         <div class="button-wrap">
                                             <a class="button small modally-close">Close me!</a><a href="#dolor" target="_modal:open" class="button gradient small">Open 3rd one!</a>
                                         </div>
-                                    </div>
+                                    </div> -->
+
+                                <!-- FIN VENTANA PARA LOS WARNINGS -->
 
                                 </div>
                             </div>
@@ -290,15 +460,54 @@ $result = $state->fetchAll();
 
                         <!-- CUARTA SECCIÓN  -->
 
-                            <div class="sigle-banner">
+                        <div class="sigle-banner">
                                 <div class="img4">
                                     <!-- <h2>jaja</h2> -->
                                 </div>
                                 <div class="banner-text">
-                                    <h2>Galeria</h2>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                                    Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
-                                    <p class="banner-btn"><a href="#">Contact US</a></p>
+                                    <h2>Ordenes SG</h2>
+                                    <div class="process-wrapper">
+                                        <div id="progress-bar-container">
+                                            <ul>
+                                                <li class="step step01 active"><div class="step-inner">HOME WORK</div></li>
+                                                <li class="step step02"><div class="step-inner">RESPONSIVE</div></li>
+                                                <li class="step step03"><div class="step-inner">CREATIVE</div></li>
+                                                <li class="step step04"><div class="step-inner">TESTIMONIALS</div></li>
+                                                <li class="step step05"><div class="step-inner">OUR LOCATIONS</div></li>
+                                            </ul>
+                                            
+                                            <div id="line">
+                                                <div id="line-progress"></div>
+                                            </div>
+                                        </div>
+
+                                        <div id="progress-content-section">
+                                            <div class="section-content discovery active">
+                                                <h2>HOME SECTION</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                            
+                                            <div class="section-content strategy">
+                                                <h2>GALLERY SECTION</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                            
+                                            <div class="section-content creative">
+                                                <h2>Creative CREATIONS</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                            
+                                            <div class="section-content production">
+                                                <h2>TESTIMONIALS NOW</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                            
+                                            <div class="section-content analysis">
+                                                <h2>OUR LOCATIONS</h2>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -338,8 +547,8 @@ $result = $state->fetchAll();
 
     <footer>
         <div class="social-bar">
-            <a href="https://www.facebook.com/bittecnologia81" class="icon icon-facebook" target="_blank"></a>
-            <a href="https://twitter.com/DevCodela" class="icon icon-twitter" target="_blank"></a>
+            <a href="https://www.facebook.com/CASnCS/" class="icon icon-facebook" target="_blank"></a>
+            <a href="http://m.me/CASnCS" class="icon icon-twitter" target="_blank"></a>
             <a href="https://www.youtube.com/c/devcodela" class="icon icon-youtube" target="_blank"></a>
             <a href="https://www.instagram.com/bit_tecnologia_81b/" class="icon icon-instagram" target="_blank"></a>
         </div>
@@ -360,8 +569,16 @@ $result = $state->fetchAll();
             // $('#ipsum').modally('ipsum', {max_width: 800});
             $('#lorem').modally();
             // $('#dolor').modally();
-            $('#dolorr').modally();
-            $('#Ordenes_form').modally();
+            $('#Chat_dialogflow').modally();
+            $('#Tabla_clientes').modally();
+            $('#Update_cliente').modally();
+            $('#Insertar_cliente').modally();
+            $('#Tabla_ordenes').modally();
+            $('#Insertar_orden').modally();
+            $('#Update_orden').modally();
+            $('#Ordenes_form').modally();// CON FIRMA
+            $('#reset_pass').modally();
+            $('#Warning').modally();
         });
     </script>
 
@@ -401,6 +618,41 @@ $result = $state->fetchAll();
     </script>
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
 
+<!-- SCRIPT PARA LA BARRA DE PROGRESO DE LAS ORDENES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(".step").click( function() {
+            $(this).addClass("active").prevAll().addClass("active");
+            $(this).nextAll().removeClass("active");
+        });
+
+        $(".step01").click( function() {
+            $("#line-progress").css("width", "3%");
+            $(".discovery").addClass("active").siblings().removeClass("active");
+        });
+
+        $(".step02").click( function() {
+            $("#line-progress").css("width", "25%");
+            $(".strategy").addClass("active").siblings().removeClass("active");
+        });
+
+        $(".step03").click( function() {
+            $("#line-progress").css("width", "50%");
+            $(".creative").addClass("active").siblings().removeClass("active");
+        });
+
+        $(".step04").click( function() {
+            $("#line-progress").css("width", "75%");
+            $(".production").addClass("active").siblings().removeClass("active");
+        });
+
+        $(".step05").click( function() {
+            $("#line-progress").css("width", "100%");
+            $(".analysis").addClass("active").siblings().removeClass("active");
+        });
+    </script>
+<!-- FIN SCRIPT PARA LA BARRA DE PROGRSO DE LAS ORDENES -->
+
 
 <!-- SCRIPT PARA EL CHATBOT -->
     <!-- DIALOGFLOW CON MICRO  -->
@@ -419,6 +671,91 @@ $result = $state->fetchAll();
         ></df-messenger>
         
 <!-- FIN SCRIPT PARA EL CHATBOT -->
+
+<!-- SCRIPT PARA GENERAR PDF EN EL FORMULARIO DE CLIENTES -->
+
+<script>
+                function loadImage(url) { /*Funcion para leer la imagen que usaremos como plantilla en el PDF*/
+                    return new Promise(resolve => {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('GET', url, true);
+                        xhr.responseType = "blob";
+                        xhr.onload = function (e) {
+                            const reader = new FileReader();
+                            reader.onload = function(event) {
+                                const res = event.target.result;
+                                resolve(res);
+                            }
+                            const file = this.response;
+                            reader.readAsDataURL(file);
+                        }
+                        xhr.send();
+                    });
+                }
+
+                let signaturePad = null; /*Iniciar el campo de firma en blanco */
+
+                window.addEventListener('load', async () => { /*Evento para seleccionar y sacar los datos ingresados por el usuario */
+
+                    const canvas = document.querySelector("canvas");
+                    canvas.height = canvas.offsetHeight;
+                    canvas.width = canvas.offsetWidth;
+
+                    signaturePad = new SignaturePad(canvas, {});
+
+                    const form = document.querySelector('#form');
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+
+                        let curso = document.getElementById('curso').value;
+                        let empresa = document.getElementById('empresa').value;
+                        let nombres = document.getElementById('nombre').value;
+                        let apellidos = document.getElementById('apellido').value;
+                        let email = document.getElementById('email').value;
+                        let direccion = document.getElementById('direccion').value;
+                        let telefono = document.getElementById('telefono').value;
+                        generatePDF(curso, empresa, nombres, apellidos, email, direccion, telefono);
+                    })
+
+                });
+
+                async function generatePDF(curso, empresa, nombres, apellidos, email, direccion, telefono) {/*Mandar los datos obtenidos al PDF */
+                    const image = await loadImage("assets/forms/ejemplo.jpg");/*Cargar la imagen */
+                    const signatureImage = signaturePad.toDataURL();/*Obtener la firma como imagen */
+
+                    const pdf = new jsPDF('p', 'pt', 'letter');
+
+                    /*Agregar la imagen de firma al PDF */
+                    pdf.addImage(image, 'PNG', 0, 0, 565, 792);
+                    pdf.addImage(signatureImage, 'PNG', 200, 700, 200, 60);
+
+                    pdf.setFontSize(22);/*Tamaño de letra */
+                    pdf.text(curso, 260, 100);
+
+                    const date = new Date();/*Sacar la fecha */
+                    pdf.text(date.getUTCDate().toString(), 235, 30);
+                    pdf.text((date.getUTCMonth() + 1).toString(), 275, 30);
+                    pdf.text(date.getUTCFullYear().toString(), 320, 30);
+
+                    pdf.setFontSize(22);/*Tamaño de la letra */
+                    /*Acomodo de los datos obtenidos por el formulario*/
+                    pdf.text(nombres, 260, 170); /* (lados, alto) */
+                    pdf.text(empresa, 260, 310)
+                    pdf.text(apellidos, 260, 240);
+                    pdf.text(direccion, 260, 380);
+                    pdf.text(telefono, 260, 450);
+                    pdf.text(email, 260, 520);
+
+                    pdf.setFillColor(0,0,0);
+
+
+                    pdf.save("example.pdf");/*Guardar el PDF */
+
+            }
+
+    </script>
+
+<!-- FIN SCRIPT PARA GENERAR PDF EN EL FORMULARIO DE CLIENTES -->    
 
 </html>
 
@@ -439,7 +776,7 @@ $result = $state->fetchAll();
             overflow-x: hidden;
             overflow-y: hidden; 
             height:100%;
-            width:101%;
+            width:100%;
             margin: 0px;
 
         }
@@ -478,8 +815,8 @@ $result = $state->fetchAll();
             max-height: 445px;
             min-width: 200px;
             min-height: 120px;
-            z-index: 0;
-            position: sticky;
+            z-index: 1;
+            /* position: sticky; */
             display: block;
             margin: auto;
         }
@@ -625,7 +962,7 @@ $result = $state->fetchAll();
             background-clip: border-box;
             box-shadow: 5px 5px 5px 0 rgba(220, 20, 60, 0.452);
             /* border: solid 3px crimson; */
-            text-align: center;
+            /* text-align: center; */
             color: #ffffffa3;
         }
 
@@ -640,13 +977,24 @@ $result = $state->fetchAll();
         .banner-text h2{
             font-size: 55px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0);
+            color: rgb(255 255 255);
             margin: 0;
             z-index: 4;
             position: sticky;
             display: block;
             margin: auto;
             /* filter: drop-shadow(3px 3px 3px #dc143c69); */
+        }
+
+        .ghost{
+            font-size: 55px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0);
+            margin: 0;
+            z-index: 4;
+            position: sticky;
+            display: block;
+            margin: auto; 
         }
 
         .banner-text p{
@@ -727,7 +1075,7 @@ $result = $state->fetchAll();
         label {
             display: inline-block;
             max-width: 100%;
-            margin-top: -12px;
+            margin-top: 5px;
             font-weight: 600;
             cursor: pointer;
         }
@@ -767,7 +1115,7 @@ $result = $state->fetchAll();
             max-width: 30px;
             overflow: hidden;
             transition: all cubic-bezier(0.46, 0.03, 0.52, 0.96) 340ms;
-            padding-top: 15px;
+            /* padding-top: 15px; */
             padding-left: 5px;
             height: 4rem;
             cursor: pointer;
@@ -1116,6 +1464,7 @@ $result = $state->fetchAll();
         color: white;
         animation: change 0.5s 0.3s forwards;
         animation: typewriter 4s steps(40) 1s 1 normal both, blinkTextCursor 500ms steps(40) infinite normal;
+        z-index: 1;
     }
     @keyframes typewriter {from { width: 0; }
         to {width: 28em;}
@@ -1127,6 +1476,67 @@ $result = $state->fetchAll();
     }
 
 </style>
+
+<!-- ESTILO PARA LAS TABLAS Y VENTANAS -->
+
+<STYLE>
+
+    .contenedor-form-tabla {
+        max-width: auto;
+        border-radius: 10px;
+        color: #fff;
+    }
+
+    .contenedor-form-tabla .btn_buscar {
+            color: #fff;
+            border: solid 1px #ffffff;
+            background-color: #2c2c2c;
+            transition: all 0.3s;
+            display: block;
+            position: absolute;
+            right: 300px;
+        }
+
+    .registro .toggle {
+        position: absolute;
+        top: 12px;
+        width: 141px;
+        height: 30px;
+        line-height: 25px;
+        text-align: center;
+        border-top: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        cursor: pointer;
+        transition: all .5s ease;
+    }
+
+    .registro .toggle:hover {
+        border-top:    2px solid crimson;
+        border-bottom: 2px solid crimson;
+    }
+
+    .registro .toggle a {
+        letter-spacing: 1px;
+        color: #fff;
+        text-decoration:none;
+    }
+
+    .registro .title_cliente{
+        position: absolute;
+        top: 9px;
+        margin: 0 300px 0;
+    }
+
+    .buscar {
+        position: absolute;
+        width: 35%;
+        margin: 0 auto;
+        left: 23%;
+    }
+
+</STYLE>
+
+<!-- FIN ESTILO PARA LAS TABLAS Y VENTANAS -->
 
 <!-- CSS para el formulario de login/registro  -->
 
@@ -1394,29 +1804,290 @@ $result = $state->fetchAll();
 
 </style>
 
+<!-- ESTILO DEL PROGRESS BAR DE LOS SG -->
+
+<style>
+        .process-wrapper {
+            margin:auto;
+            max-width:1080px;
+        }
+
+        #progress-bar-container {
+            position:relative;
+            width:90%;
+            margin:auto;
+            height:100px;
+            margin-top:65px;
+        }
+
+        #progress-bar-container ul {
+            padding:0;
+            margin:0;
+            padding-top:15px;
+            z-index:9999;
+            position:absolute;
+            width:100%;
+            margin-top:-40px
+        }
+
+        #progress-bar-container li:before {
+            content:" ";
+            display:block;
+            margin:auto;
+            width:30px;
+            height:30px;
+            border-radius:10px;
+            border:solid 2px crimson;
+            transition:all ease 0.3s;
+            
+        }
+
+        #progress-bar-container li.active:before, #progress-bar-container li:hover:before {
+            border:solid 2px crimson;
+                
+            background: linear-gradient(to right, crimson 0%,#5e0000 100%); 
+            border-radius: 10px;
+        }
+
+        #progress-bar-container li {
+            list-style:none;
+            float:left;
+            width:20%;
+            text-align:center;
+            color:crimson;
+            text-transform:uppercase;
+            font-size:11px;
+            cursor:pointer;
+            font-weight:700;
+            transition:all ease 0.2s;
+            vertical-align:bottom;
+            height:60px;
+            position:relative;
+        }
+
+        #progress-bar-container li .step-inner {
+            position:absolute;
+            width:100%;
+            bottom:0;
+            font-size: 14px;
+        }
+
+        #progress-bar-container li.active, #progress-bar-container li:hover {
+            color:#aa0101;
+        }
+
+        #progress-bar-container li:after {
+            content:" ";
+            display:block;
+            width:8px;
+            height:8px;
+            background:crimson;
+            margin:auto;
+            border:solid 3px #5e0000;
+            /*! border-radius:50%; */
+            margin-top:43px;
+            box-shadow:0 2px 13px -1px crimson;
+            transition:all ease 0.2s;
+            
+            border-radius: 4px;
+            /*! border-color: linear-gradient(to right, crimson 0%,#000000c9 100%); */
+        }
+
+        #progress-bar-container li:hover:after {
+            background:#5e0000;
+        }
+
+        #progress-bar-container li.active:after {
+            background:#5e0000;
+        }
+
+        #progress-bar-container #line {
+            width:80%;
+            margin:auto;
+            background: linear-gradient(to right, black 0%,#dc143c00 100%);
+            height:6px;
+            position:absolute;
+            left:10%;
+            top:57px;
+            z-index:1;
+            border-radius:50px;
+            transition:all ease 0.9s;
+        }
+
+        #progress-bar-container #line-progress {
+            content:" ";
+            width:3%;
+            height:100%;
+            /* background: #207893;	  */
+            background: linear-gradient(to right, #5e0000 0%, crimson 100%); 
+            position:absolute;
+            z-index:2;
+            border-radius:50px;
+            transition:all ease 0.9s;
+        }
+
+        #progress-content-section {
+            
+            width:90%;
+            margin: auto;
+            background: #620909;
+            border-radius: 20px;
+        }
+
+        #progress-content-section .section-content {
+            padding:30px 40px;
+            text-align:center;
+        }
+
+        #progress-content-section .section-content h2 {
+            font-size:17px;
+            text-transform:uppercase;
+            color:#333;
+            letter-spacing:1px;
+        }
+
+        #progress-content-section .section-content p {
+            font-size:16px;
+            line-height:1.8em;
+            color:#777;
+        }
+
+        #progress-content-section .section-content {
+            display:none;
+            animation: FadeInUp 700ms ease 1;
+            animation-fill-mode:forwards;
+            transform:translateY(15px);
+            opacity:0;
+        }
+
+        #progress-content-section .section-content.active {
+            display:block;
+        }
+
+        @keyframes FadeInUp {
+            0% {
+                transform:translateY(15px);
+                opacity:0;
+            }
+            
+            100% {
+                transform:translateY(0px);
+                opacity:1;
+            }
+        }
+
+    button#widgetIcon {
+        background: #42a5f500;
+        background: #42a5f500;
+        border: none;
+        border-radius: 50%;
+        bottom: 0px;
+        /* box-shadow: rgb(0 0 0 / 24%) 1px 4px 15px 0px; */
+        cursor: pointer;
+        height: 105px;
+        position: absolute;
+        right: 0px;
+        width: 22px;
+    }
+
+</style>
+<!-- FIN ESTILO DEL PROGRESS BAR DE LOS SG -->
+
  <!-- STYLE PARA CHATBOT -->
  <style>
 
-df-messenger {
-    --df-messenger-bot-message: crimson;
-    --df-messenger-button-titlebar-color: #2e2e2ebf;
-    --df-messenger-chat-background-color: #2e2e2e;
-    --df-messenger-font-color: rgb(255 255 255);
-    --df-messenger-send-icon: #ff0000;
-    --df-messenger-user-message:  #5d5d5d; /*#420404*/
-    --df-messenger-input-box-color: #2e2e2e;
-    --df-messenger-input-font-color: #ffff;
-}
+    df-messenger {
+        --df-messenger-bot-message: crimson;
+        --df-messenger-button-titlebar-color: #2e2e2ebf;
+        --df-messenger-chat-background-color: #2e2e2e;
+        --df-messenger-font-color: rgb(255 255 255);
+        --df-messenger-send-icon: #ff0000;
+        --df-messenger-user-message:  #5d5d5d; /*#420404*/
+        --df-messenger-input-box-color: #2e2e2e;
+        --df-messenger-input-font-color: #ffff;
+    }
 
-button#widgetIcon .df-chat-icon {
-    height: 50px;
-    left: 1px;
-    opacity: 1;
-    position: absolute;
-    top: 0px;
-    transition: opacity 0.5s;
-    width: 50px;
-}
+    button#widgetIcon .df-chat-icon {
+        height: 50px;
+        left: 1px;
+        opacity: 1;
+        position: absolute;
+        top: 0px;
+        transition: opacity 0.5s;
+        width: 50px;
+    }
 
 </style>
 <!-- STYLE PARA CHATBOT -->
+
+<!-- RESPONSIVO -->
+
+<style>
+
+    @media (max-width: 600px) {
+
+    .line {
+            /* display: none; */
+            transform: translate(-50%,-100%);
+        }
+
+        @keyframes typewriter {from { width: 0; }
+            to {width: 10em;}
+        }
+
+    img.logo{
+            width: 97%;
+            height: 100%;
+            max-width: 499px;
+            max-height: 531px;
+        }
+
+        .button.white {
+            transform: translateY(-45%);
+        }
+
+        .wave {
+            bottom: 93%;
+        }
+
+        .slick-dots {
+            bottom: 75px;
+        }
+
+    }
+ </style>
+
+  <!-- RESPONSIVO -->
+
+  <!-- ESTILO PARA ELFORMULARIO DE CLIENTE -->
+  <style>
+
+      .form.select{
+        color: black;
+      }
+
+      #curso.form-select{
+          color: black;
+      }
+
+      .btn-primary {
+        color: #fff;
+        border: solid 3px #ffffff;
+        background-color: #2c2c2c;
+        transition: all 0.3s;
+        border-radius: 96px 25px;
+        display: block; 
+        margin: 0 auto;
+        /* transform: translate(115%, 30%); */
+    }
+
+    .btn-primary:hover{
+        color: black;
+        background-color: #ffff;
+        border-color: crimson;
+        border-radius: 96px 25px;
+        box-shadow: 3px 3px 10px 0 rgb(220 20 60 / 45%);
+    }
+
+  </style>
+<!-- FIN ESTILO PARA ELFORMULARIO DE CLIENTE -->

@@ -1,112 +1,7 @@
 <?php
 
-require_once 'config/functions.php';
-
-$conexion = connect($server,$db,$user,$pass);
-if(!$conexion){
-    header('Location: config/404.php');
-}
-session_start();//se crea la sesion
-
-if(isset($_SESSION['acceso'])){
-    header('Location: acceso_cas.php');
-}
-//se verifica si existe el envio de datos. Inicio de sesion
-if(isset($_POST['login'])){
-    $user = ($_POST['name']);
-    $state = $conexion->prepare("SELECT nombre_taller, pass_taller, type FROM admin_taller WHERE nombre_taller = :user");
-    // $state = $conexion->prepare("SELECT name, pass, type FROM users WHERE name = :user");//busqueda preparada
-    $state->bindValue(':user', $user);//se utiliza la variable de usuario en la validacion
-    $state->execute();//se ejecuta la busqueda
-
-    $result = $state->fetch(PDO::FETCH_ASSOC);
-
-    if($result === false){
-        $error2="";
-    }else{
-        if(password_verify($_POST['pass'], $result['pass_taller'])) {
-            $_SESSION['acceso'] = $result['nombre_taller'];//se asigna en nombre
-            $_SESSION['permisos'] = $result['type'];//se asigna el permiso
-            header('Location: acceso_cas.php');
-           }else{
-            $error2="";
-        }
-    }
-
-}
-
-if(isset($_SESSION['acceso'])){
-    if($_SESSION['permisos']=="admin"){
-        $name="admin";
-    }else{
-        $name=($_SESSION['acceso']);
-    }
-    
-}else{
-    $name="Guess";
-}
-
-//Se verifica si existe el envio de datos. Registro
-if(isset($_POST['reg'])){
-    $name = $_POST["name"];//variable con el nombre de usuario
-    $pass = $_POST["pass"];//variable con la contraseña
-    $telefono  = $_POST["telefono"];
-    $email = $POST["email"];
-    $domicilio = $POST["domicilio"];
-    
-    //queremos saber si existe
-    $validar = $conexion->prepare("SELECT nombre_taller FROM admin_taller WHERE  nombre_taller= .$name. LIMIT 1;");
-    $validar->execute([$name]);
-    //Ver cuántas filas devuelve
-    $filas = $validar->rowCount();
-
-    //Si son 0 o menos, significa que no existe
-    if ($filas <= 0) {
-        $passHash = password_hash($pass, PASSWORD_BCRYPT, array("cost" => 12));
-        $insert = $conexion->prepare("INSERT INTO admin_taller (nombre_taller, tel_taller, mail_taller, domicilio_taller, pass_taller,
-         type) VALUES (:name, :telefono, :email, :domicilio, :pass, :type)");//registro de datos
-        $insert->execute(array(
-            ':name' => $_POST['name'],
-            ':pass' => $passHash,
-            ':email' => $_POST['email'],
-            ':telefono' => $_POST['telefono'],
-            ':domicilio' => $_POST['domicilio'],
-            ':type' => "user"
-        ));
-        //  $state->bindParam(':nombre_taller', $name, PDO::PARAM_STR);
-        //  $state->bindParam(':tel_taller', $telefono, PDO::PARAM_STR);
-        //  $state->bindParam(':mail_taller', $email, PDO::PARAM_STR);
-        //  $state->bindParam(':pass_taller', $passHash, PDO::PARAM_STR);
-        //  $state->bindParam(':domicilio_taller', $domicilio, PDO::PARAM_STR);
-        //  $state->execute();
-
-        $insert = $conexion->prepare("INSERT INTO users (name, email, pass, type) VALUES (:name, :email, :pass, :type)");//registro de datos
-        $insert->execute(array(
-            ':name' => $_POST['name'],
-            ':email' => $_POST['email'],
-            ':pass' => $passHash,
-            ':type' => "user"
-        ));
-        //se crea la tabla para el usuario
-        $conexion->exec("CREATE TABLE ".$name." (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            title VARCHAR(35),
-            intro TEXT,
-            descripcion TEXT,
-            image VARCHAR(255)
-        );");
-
-        $_SESSION['acceso'] = $_POST["name"];//se asigna en nombre
-        $_SESSION['permisos'] = "user";//se asigna el permiso
-
-        mkdir("img/admins/$name", 0755);//se crea su propia carpeta
-
-        header('Location: acceso_cas.php');
-        
-     } else {
-         $error = "";
-    }
-}
+    require_once 'config/login.php';
+    require_once 'config/pass.php';
 
 ?>
 
@@ -192,7 +87,7 @@ if(isset($_POST['reg'])){
                             </div> -->
                             <?php echo "<div class='menu-title'>$name</div>";?>
 
-                            <div class="menu-item" href="#dolorr" target="_modal:open">
+                            <!-- <div class="menu-item" href="#dolorr" target="_modal:open">
                                 <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle" href="#dolorr" target="_modal:open">
                                 <div class="expander" href="#dolorr" target="_modal:open">
                                     <label for="sneaky_toggle" href="#dolorr" target="_modal:open">
@@ -200,21 +95,20 @@ if(isset($_POST['reg'])){
                                         <span class="menu-text" href="#dolorr" target="_modal:open">Inicio</span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
 
-                        <a href="#dolorr" target="_modal:open">
-                            <div class="menu-item" href="#dolorr" target="_modal:open">
+                        <a href="#lorem" target="_modal:open">
+                            <div class="menu-item" href="#Cliente_form" target="_modal:open">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle2">
                                 <div class="expander">
                                     <label for="sneaky_toggle2">
-                                        
-                                        <i class="menu-icon fa fa-user" href="#dolorr" target="_modal:open"></i>
-                                        <span class="menu-text">Profile</span>
+                                        <i class="menu-icon fa fa-user" href="#Cliente_form" target="_modal:open"></i>
+                                        <span class="menu-text">Logeate</span>
                                     </label>
                                 </div>
                             </div>
                         </a>
-
+<!-- 
                         <a href="#dolorr" target="_modal:open">
                             <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle3">
@@ -225,8 +119,8 @@ if(isset($_POST['reg'])){
                                     </label>
                                 </div>
                             </div>
-                        </a>
-
+                        </a> -->
+<!-- 
                             <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle4">
                                 <div class="expander">
@@ -235,8 +129,8 @@ if(isset($_POST['reg'])){
                                         <span class="menu-text">Compras</span>
                                     </label>
                                 </div>
-                            </div>
-
+                            </div> -->
+<!-- 
                             <a href="#Ordenes_form" target="_modal:open">
                                 <div class="menu-item" href="#Ordenes_form" target="_modal:open">
                                     <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle5">
@@ -247,9 +141,9 @@ if(isset($_POST['reg'])){
                                         </label>
                                     </div>
                                 </div>
-                            </a>
+                            </a> -->
 
-                            <div class="menu-item">
+                            <!-- <div class="menu-item">
                                 <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle6">
                                 <div class="expander">
                                     <label for="sneaky_toggle6">
@@ -257,7 +151,7 @@ if(isset($_POST['reg'])){
                                         <span class="menu-text">Contacto</span>
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
             <!-- CONTENEDOR PADRE -->
@@ -280,13 +174,13 @@ if(isset($_POST['reg'])){
                                 <div class="wave"></div><div class="wave wave2"></div><div class="wave wave3"></div>
                                 <div class="wav"></div><div class="wav wav2"></div><div class="wav wav3"></div>
                                     <!--  FIN DE ONDAS DE ADORNO "WAVE" -->
-                                <div id="lorem" modally-max_width="500">
+                            <div id="lorem" modally-max_width="500">
                                     <!-- <h1 class="modal-title serif">Bienvenido</h1> -->
 
                                     <!-- Contenedor registro/login  -->
                                         
-                                    <section class="registro" id="color2">
-                                        <div class="contenedor-form">
+                                <section class="registro" id="color2">
+                                    <div class="contenedor-form">
                                         <div class="toggle">
                                             <span> Crear Cuenta</span>
                                         </div>
@@ -299,9 +193,15 @@ if(isset($_POST['reg'])){
                                                 <input type="submit"   name="login" value="Iniciar Sesión">
                                                 <?php if (isset($error2)){ echo "<p style='color:white;'>Datos no validos</p>";} ?>
                                             </form>
-                                            <div class="reset-password">
-                                            <a href="#dolorr" target="_modal:open">Olvide mi Contraseña?</a>
-                                        </div> 
+                                            <div class="reset-password" >
+                                                <a href="#reset_pass" target="_modal:open">Olvide mi Contraseña?</a>
+                                            </div> 
+                                        </div>
+
+                                        <div id="dolorr" modally-max_width="370">
+                                            <div class="chatbot">
+                                                <iframe width="330" height="500" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9c7656be-7921-441f-b4c9-408a4646b170"></iframe>
+                                            </div>
                                         </div>
                                         
                                         <div class="formulario">
@@ -324,23 +224,91 @@ if(isset($_POST['reg'])){
                                                 <?php if (isset($error)){ echo "<label style='color:white;'> El Usuario ya existe</label>";} ?>
                                             </form>
                                         </div>
-                                        <!-- <div class="reset-password">
-                                            <a href="#">Olvide mi Contraseña?</a>
-                                        </div> -->
-                                        </div>
-                                    </section>
-
                                     </div>
-                                    <!-- modally-max_width="380" -->
-                                    <div id="dolorr" modally-max_width="323">
-                                        <div class="chatbot">
-                                        <iframe width="278" height="520" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9c7656be-7921-441f-b4c9-408a4646b170"></iframe>
-                                        </div>
-                                    </div>
+                                </section>
 
-                                    <div id="Ordenes_form" modally-max_width="500">
+                            </div>
 
-                                        <!-- FIN DE FORMULARIO CLIENTES -->  
+                            <div id=reset_pass modally-max_width="370" class="registro" id="color2">
+                                                    <form action="#" method="post" class="formulario" >
+
+                                                        <h2>Cambiar contraseña</h2>
+
+                                                        <input class="form-control" type="pass" name="pass" id="pass" placeholder="Ingresa el correo de tu cuenta" required><br>
+                                                        
+                                                        <?php if (isset($error2)){ echo "<label style='color:red'Elcorreo no coincide</label><br>";} ?>
+                                                       
+                                                        <?php if (isset($ok)){ echo "<label style='color:green'>Contraseña actualizada</label><br>";} ?>
+                                                        <input class="form-control" type="password" name="npass" id="npass" placeholder="Nueva Contraseña" required><br>
+
+                                                        <input class="form-control" type="password" id="cpass" placeholder="Repite la contraseña"required><br>
+
+                                                        <div class="alerta" style="display: none;"></div>
+
+                                                        <input type="submit" name="newpass"  class="btn btn-primary" value="cambiar">
+                                                        <!-- <input type="reset" value="Limpiar" class="b1"> -->
+
+                                                    </form>
+
+                                            </div>
+
+                            <div id="galeria_taller" modally-max_width="500" class="registro" id="color2">
+                                                
+                                                    <form action="#" method="post" class="formulario">
+                                                        <label for="title">Titulo</label>
+                                                        <input class="form-control" type="text" name="title" id="title" required><br>
+                                                    
+                                                        <label for="intro">Introduccion</label>
+                                                        <textarea class="form-control" ame="intro" id="intro" placeholder="Escribe una breve reseña" required></textarea><br> 
+                                                        
+                                                        <label for="descripcion">Descripcion</label>
+                                                        <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Escribe la descripcion detallada" required></textarea><br>
+                                                        
+                                                        <input  class="btn btn-primary" type="submit" value="Guardar" name="edit" class="b1">
+                                                        <input class="btn btn-primary" type="reset" value="Limpiar" class="b1">
+                                                    </form>
+                                            
+                            </div>
+
+                                            
+                                    <!-- <div id="Cliente_form" modally-max_width="500">
+                                        <form action="insert_client.php" class="form-register" name="form" method="post">
+
+                                            <h3>REGISTRO DE CLIENTE</h3>
+
+                                                    <div>
+                                                        <label for="nombre_cliente" class="form-label">Nombre:</label>
+                                                        <input type="text" name="nombre_cliente" class="form-control" id="nombre_cliente" required>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="domicilio_cliente" class="form-label">Domicilio:</label>
+                                                        <input type="text" name="domicilio_cliente" class="form-control" id="domicilio_cliente" required>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <label for="correo_cliente" class="form-label">Correo:</label>
+                                                        <input type="email" name="correo_cliente" class="form-control" id="correo_cliente" required>
+                                                    </div>
+                                                                                       
+                                                    <div>
+                                                        <label for="tel_cliente" class="form-label">Telefono:</label>
+                                                        <input type="tel" name="tel_cliente" class="form-control" id="tel_cliente" required>
+                                                    </div>
+                                                
+                                                    <div>
+                                                        <label for="pass_client" class="form-label">Contraseña:</label>
+                                                        <input type="text" name="pass_client" class="form-control" id="pass_client" required>
+                                                    </div>
+                                            
+                                                    <button class="btn btn-primary" type="submit" name="enviar">Guardar</button>
+                                                
+                                        </form>
+                                    </div> -->
+
+                                    <!-- FORMULARIO ORDENES -->
+
+                                    <!-- <div id="Ordenes_form" modally-max_width="500">
                                             <form id="form">
                                                 <div class="mb-3">
                                                     <label for="curso" class="form-label">Tipo de servicio</label>
@@ -382,20 +350,20 @@ if(isset($_POST['reg'])){
                                                         <label for="telefono" class="form-label">Telefono del cliente</label>
                                                         <input type="text" class="form-control" id="telefono">
                                                     </div>
-                                                </div>
+                                                </div> -->
 
                                                 <!--Apartado de firma digital y boton de PDF-->
-                                                <span class="d-block pb-2">Firma digital aquí</span>
+
+                                                <!-- <span class="d-block pb-2">Firma digital aquí</span>
                                                 <div class="signature mb-2" style="width: 100%; height: 150px;">
                                                     <canvas id="signature-canvas" style="border: 2px dashed #969696; width: 100%; height: 150px;"></canvas>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary mb-4">Generar orden</button>
-                                            </form>
+                                            </form> -->
 
                                         <!-- FIN DE FORMULARIO CLIENTES -->
 
-                                    </div>
-
+                                    <!-- </div> -->
                                 </div>
                             </div>
 
@@ -490,7 +458,7 @@ if(isset($_POST['reg'])){
                                     <h2>Galería</h2>
                                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
                                     Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
-                                    <p class="banner-btn"><a href="#">Contact US</a></p>
+                                    <p class="banner-btn"><a href="#galeria_taller" target="_modal:open">Subir</a></p>
                                 </div>
                             </div>
 
@@ -541,6 +509,9 @@ if(isset($_POST['reg'])){
             // $('#dolor').modally();
             $('#dolorr').modally();
             $('#Ordenes_form').modally();
+            $('#Cliente_form').modally();
+            $('#reset_pass').modally();
+            $('#galeria_taller').modally();
         });
     </script>
 
