@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div>
         <form action="buscar.php" method="post">
@@ -27,24 +29,24 @@
                 <td>TELEFONO</td>
             </tr>
             <?php
-                $buscar = $_POST['buscar'];
-                $conexion = mysqli_connect("localhost", "root", "", "formulario");
-                $sql = "SELECT id, servicio, empresa, nombre, apellido, correo, direccion, telefono FROM clientes 
+            $buscar = $_POST['buscar'];
+            $conexion = mysqli_connect("localhost", "root", "", "formulario");
+            $sql = "SELECT id, servicio, empresa, nombre, apellido, correo, direccion, telefono FROM clientes 
                 WHERE nombre like '$buscar' '%' order by id desc";
-                $resultado = mysqli_query($conexion, $sql);
-                while ($mostrar = mysqli_fetch_row($resultado)) {
-                    ?>
-                    <tr>
-                        <td><?php echo $mostrar[0] ?></td>
-                        <td><?php echo $mostrar[1] ?></td>
-                        <td><?php echo $mostrar[2] ?></td>
-                        <td><?php echo $mostrar[3] ?></td>
-                        <td><?php echo $mostrar[4] ?></td>
-                        <td><?php echo $mostrar[5] ?></td>
-                        <td><?php echo $mostrar[6] ?></td>
-                        <td><?php echo $mostrar[7] ?></td>
-                        <td>
-                            <a href="editar.php?
+            $resultado = mysqli_query($conexion, $sql);
+            while ($mostrar = mysqli_fetch_row($resultado)) {
+            ?>
+                <tr>
+                    <td><?php echo $mostrar[0] ?></td>
+                    <td><?php echo $mostrar[1] ?></td>
+                    <td><?php echo $mostrar[2] ?></td>
+                    <td><?php echo $mostrar[3] ?></td>
+                    <td><?php echo $mostrar[4] ?></td>
+                    <td><?php echo $mostrar[5] ?></td>
+                    <td><?php echo $mostrar[6] ?></td>
+                    <td><?php echo $mostrar[7] ?></td>
+                    <td>
+                        <a href="editar.php?
                             id=<?php echo $mostrar[0] ?> &
                             servicio=<?php echo $mostrar[1] ?> &
                             empresa=<?php echo $mostrar[2] ?> &
@@ -54,13 +56,33 @@
                             direccion=<?php echo $mostrar[6] ?> &
                             telefono=<?php echo $mostrar[7] ?>
                             ">Editar</a>
-                            <a href="speliminar.php? id=<?php echo $mostrar[0] ?>">Eliminar</a>
-                        </td>
-                    </tr>
-                <?php
-                }
-                ?>
+                        <a href="speliminar.php? id=<?php echo $mostrar[0] ?>">Eliminar</a>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
         </table>
     </div>
 </body>
+
 </html>
+
+
+
+<div>
+    <label for="curso" class="form-label">Seleccione un cliente: </label>
+    <select class="form-control" id="curso" name="id_orden">
+        <!-- <option value=""><?php //echo $orden->id_orden
+                                ?></option> a -->
+        <!-- placeholder="Ejemplo: JLN-34-87" -->
+        <?php
+        foreach ($select_cliente as $dato) {
+        ?>
+            <option value=""><?php echo $dato->id_clientes ?>
+                .- <?php echo $dato->nombre_cliente ?></option>
+        <?php
+        }
+        ?>
+    </select>
+</div>

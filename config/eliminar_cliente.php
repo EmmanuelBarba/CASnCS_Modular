@@ -14,15 +14,6 @@
             alert("El Cliente ha sido eliminado con exito.");
             window.location.href="../acceso_cas.php";
             </script>';
-
-            // echo '<script type="text/javascript">
-            // confirm("El Cliente a sido eliminado con exito.");
-            // document.location.href="../acceso_cas.php";
-            // </script>';
-
-      // header("Location: ../index_cas.php");
 	}else{
 		echo "Error";
 	}
-
-?>

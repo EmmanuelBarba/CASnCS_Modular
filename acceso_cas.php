@@ -8,7 +8,7 @@ include 'config/pass.php';
 // include 'config/editar_clientes.php';
 // include 'config/eliminar_cliente.php';
 
-$consulta = $con->query("SELECT id_clientes, nombre_cliente FROM clientes;");
+$consulta = $con->query("SELECT id_clientes, nombre_cliente FROM clientes where taller_hasclient = '$id_taller';");
 $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
 // // SELECT clientes.nombre_cliente FROM orden_servicio, clientes WHERE client_hasorden = id_clientes
@@ -323,6 +323,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                         <td align="center">PLACAS</td>
                                         <td align="center"><i class="fa fa-cogs"></i></td>
                                         <td align="center"><i class="fa fa-user"></i></td>
+                                        <td align="center">POST ID</i></td>
                                     </tr>
 
                                     <?php
@@ -336,6 +337,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                             <td><?php echo $dato->placas_coche; ?></td>
                                             <td><a href="config/editar_ordenform.php?id=<?php echo $dato->id_sg; ?>">Actualizar</a></td>
                                             <td><a href="config/eliminar_orden.php?id=<?php echo $dato->id_sg; ?>">Eliminar</a></td>
+                                            <td><a href="#<?php echo $dato->id_sg; ?>">Buscar</a></td>
                                         </tr>
                                     <?php
                                     }
@@ -355,33 +357,30 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                         <form action="#" class="form-register" name="form" method="POST">
                             <h2>Orden de servicio SG</h2>
 
-                            <div>
-                                <label for="curso" class="form-label">Seleccione un cliente: </label>
-                                <select class="form-control" id="curso" name="id_orden">
-                                    <!-- <option value=""><?php //echo $orden->id_orden
-                                                            ?></option> -->
-                                    <!-- placeholder="Ejemplo: JLN-34-87" -->
-                                    <?php
-                                    foreach ($select_cliente as $dato) {
-                                    ?>
-                                        <option value=""><?php echo $dato->id_clientes ?>
-                                            .- <?php echo $dato->nombre_cliente ?></option>
-                                    <?php
-                                    }
-                                    ?>
-
-                                    <!-- <option value="Recepción">Recepción</option>
-                                                        <option value="En Espera">En espera</option> 
-                                                        <option value="En Proceso">En proceso</option> 
-                                                        <option value="Finalizado">Finalizado</option> 
-                                                        <option value="Insumos">Insumos</option>  -->
-                                </select>
-                            </div>
+                            <!-- Option para lista de los clienteslos clientes  -->
 
                             <!-- <div>
-                                                        <label for="id_orden" class="form-label">ID cliente:</label>
-                                                        <input type="text" name="id_orden" class="form-control" id="id_orden" placeholder="Número de cliente" required>
-                                                    </div> -->
+                                <label for="curso" class="form-label">Seleccione un cliente: </label>
+                                <select class="form-control" id="curso" name="id_orden">
+                                    <?php
+                                    //foreach ($select_cliente as $dato) {
+                                    ?>
+                                        <option value=""><?php //echo $dato->id_clientes 
+                                                            ?>
+                                            .- <?php //echo $dato->nombre_cliente 
+                                                ?></option>
+                                    <?php
+                                    //}
+                                    ?>
+                                </select>
+                            </div> -->
+
+                            <!-- Fin de option para lista de los clienteslos clientes  -->
+
+                            <div>
+                                <label for="id_orden" class="form-label">ID cliente:</label>
+                                <input type="text" name="id_orden" class="form-control" id="id_orden" placeholder="Id, o nombre del cliente" required>
+                            </div>
 
                             <div>
                                 <label for="modelo_coche" class="form-label">Datos automóvil:</label>
@@ -402,16 +401,6 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                 <label for="observaciones_coche" class="form-label">Observaciones:</label>
                                 <input type="text" name="observaciones_coche" class="form-control" id="observaciones_coche" placeholder="(Rayones, golpes, objetos, condiciones)" required>
                             </div>
-
-                            <!-- <div>
-                                                        <label for="estado_orden" class="form-label">Progreso de la orden:</label>
-                                                        <input type="text" name="estado_orden" class="form-control" id="estado_orden" placeholder="Describe el progreso de la orden..." required>
-                                                    </div> -->
-
-                            <!-- <div>
-                                                        <label for="informe_tecnico" class="form-label">Reporte final:</label>
-                                                        <input type="text" name="informe_tecnico" class="form-control" id="informe_tecnico" placeholder="Reporta toda la reparación..." required>
-                                                    </div> -->
                             <br>
                             <td colspan="2"><button class="btn btn-primary" type="submit" name="enviar_orden">Guardar SG</button></td>
                         </form>
@@ -431,7 +420,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                             <input class="form-control" type="password" name="pass" id="pass" placeholder="Ingresa la contraseña actual" required><br>
 
                             <?php if (isset($error_pass)) {
-                                echo "<label style='color:red'>Las contraseñas no coinciden</label><br>";
+                                echo "<label style='color:red'>Las contraseñas no coincide</label><br>";
                             } ?>
 
                             <?php if (isset($ok)) {
@@ -1277,7 +1266,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 
     .icon {
-        color: rgb(0, 0, 0);
+        color: black;
         text-decoration: none;
         padding: .7rem;
         /* padding-right: 1rem; poner esto en min with  */
@@ -1290,14 +1279,17 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     .icon-youtube,
     .icon-instagram {
         background: #ffffff38;
+        /* color: black; */
     }
 
     .icon:first-child {
         border-radius: 1rem 0 0 0;
+        /* color: black; */
     }
 
     .icon:last-child {
         border-radius: 0 0 0 1rem;
+        /* color: black; */
     }
 
     .icon:hover {
