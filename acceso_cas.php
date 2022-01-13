@@ -5,8 +5,6 @@ require_once 'config/insert_orden.php';
 include 'config/form_clientes.php';
 include 'config/form_orden.php';
 include 'config/pass.php';
-// include 'config/editar_clientes.php';
-// include 'config/eliminar_cliente.php';
 
 $consulta = $con->query("SELECT id_clientes, nombre_cliente FROM clientes where taller_hasclient = '$id_taller';");
 $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
@@ -29,7 +27,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/slick.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- EN CASO DE PEDO BORRAR LA LINEA DE ABAJO -->
+    <!-- EN CASO DE ERRORES CON BOOTSTRAP BORRAR LA LINEA DE ABAJO -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- MODAL DE FORMULARIO -->
     <link rel="stylesheet" href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/modal.css">
@@ -39,24 +37,22 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     <script src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/jspdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
     <!--  FIN APLICACIÓN PARA LA FIRMA  -->
-    <title>CAS</title>
+    <title>C&CS</title>
 </head>
 
 <!-- PRINCIPAL INICIO -->
 
 <body id="pop">
     <!-- NAVEGACIÓN -->
-    <!-- MENÚ -->
-    <!-- MENU  -->
     <!-- MENU CON MIVIMIENTO LIBRE PARA EL RESPONSIVE -->
     <nav class="body">
         <div class="navigation">
             <div class="toggle"></div>
             <ul>
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
-                        <span class="title">Principal</span>
+                    <a href="#Tabla_ordenes" target="_modal">
+                        <span class="icon"><i class="fa fa-clipboard" aria-hidden="true"></i></span>
+                        <span class="title">Ordenes SG</span>
                     </a>
                 </li>
                 <li>
@@ -72,7 +68,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#Config" target="_modal">
                         <span class="icon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
                         <span class="title">Configuración</span>
                     </a>
@@ -101,56 +97,36 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                             </div> -->
             <?php echo "<div class='menu-title'>$name</div>"; ?>
 
-            <!-- <div class="menu-item" href="#dolorr" target="_modal:open">
-                                <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle" href="#dolorr" target="_modal:open">
-                                <div class="expander" href="#dolorr" target="_modal:open">
-                                    <label for="sneaky_toggle" href="#dolorr" target="_modal:open">
-                                        <i class="menu-icon fa fa-home" href="#dolorr" target="_modal:open" ></i>
-                                        <span class="menu-text" href="#dolorr" target="_modal:open">Inicio</span>
-                                    </label>
-                                </div>
-                            </div> -->
-
             <a href="Tabla_clientes" target="_modal:open">
                 <div class="menu-item" href="#Tabla_clientes" target="_modal:open">
                     <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle2">
                     <div class="expander">
                         <label for="sneaky_toggle2">
-                            <i class="menu-icon fa fa-user" href="#Tabla_clientes" target="_modal:open"></i>
+                            <i class="fa fa-users" href="#Tabla_clientes" target="_modal:open"></i>
                             <span class="menu-text">Clientes</span>
                         </label>
                     </div>
                 </div>
             </a>
 
-            <a href="#dolorr" target="_modal:open">
+            <a href="#Calendario" target="_modal:open">
                 <div class="menu-item">
                     <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle3">
                     <div class="expander">
                         <label for="sneaky_toggle3">
-                            <i class="menu-icon fa fa-file"></i>
+                            <i class="fa fa-calendar"></i>
                             <span class="menu-text">Agenda</span>
                         </label>
                     </div>
                 </div>
             </a>
 
-            <!-- <div class="menu-item">
-                                <input type="radio" class="toggle" name="menu_group"id="sneaky-toggle4">
-                                <div class="expander">
-                                    <label for="sneaky_toggle4">
-                                        <i class="menu-icon fa fa-edit"></i>
-                                        <span class="menu-text">Compras</span>
-                                    </label>
-                                </div>
-                            </div> -->
-
             <a href="#Tabla_ordenes" target="_modal:open">
                 <div class="menu-item" href="#Ordenes_form" target="_modal:open">
                     <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle5">
                     <div class="expander">
                         <label for="sneaky_toggle5">
-                            <i class="menu-icon fa fa-edit"></i>
+                            <i class="fa fa-clipboard"></i>
                             <span class="menu-text">Ordenes</span>
                         </label>
                     </div>
@@ -161,7 +137,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                 <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle6">
                 <div class="expander">
                     <label for="sneaky_toggle6">
-                        <i class="menu-icon fa fa-envelope"></i>
+                        <i class="fa fa-envelope-open"></i>
                         <span class="menu-text">Contacto</span>
                     </label>
                 </div>
@@ -218,15 +194,16 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                 </div>
                                 <table class="" border="1">
                                     <tr>
-                                        <td align="center">ID</td>
-                                        <td align="center">NOMBRE</td>
-                                        <td align="center">DOMICILIO</td>
-                                        <td align="center">CORREO</td>
-                                        <td align="center">TELEFONO</td>
-                                        <!-- <td>FECHA</td> -->
-                                        <td align="center">TALLER</td>
-                                        <td align="center"><i class="fa fa-cogs"></i></td>
+                                        <td align="center"><i class="fa fa-id-card"></i></td>
                                         <td align="center"><i class="fa fa-user"></i></td>
+                                        <td align="center"><i class="fa fa-map"></i></td>
+                                        <td align="center"><i class="fa fa-envelope-open"></i></td>
+                                        <td align="center"><i class="fa fa-phone-square"></i></td>
+                                        <!-- <td>FECHA</td> -->
+                                        <td align="center"><i class="fa fa-car"></i></td>
+                                        <td align="center"><i class="fa fa-edit"></i></td>
+                                        <td align="center"><i class="fa fa-trash"></i></td>
+                                        <td align="center"><i class="fa fa-print"></td>
                                         <!-- <td>CONTRASEÑA</td> -->
                                         <!-- <td>TIPO DE USUARIO</td> -->
                                     </tr>
@@ -249,6 +226,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                                         ?></td> -->
                                             <td><a href="config/editar_clientes.php?id=<?php echo $dato->id_clientes; ?>">Editar</a></td>
                                             <td><a href="config/eliminar_cliente.php?id=<?php echo $dato->id_clientes; ?>">Eliminar</a></td>
+                                            <td><a href="config/imprimir_cliente.php?id=<?php echo $dato->id_clientes; ?>">Imprimir</a></td>
                                         </tr>
                                     <?php } ?>
                                 </table>
@@ -316,14 +294,15 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                 </div>
                                 <table border="1">
                                     <tr>
-                                        <td align="center" style="margin: 3px">ID SG</td>
-                                        <td align="center">ID CLIENTE</td>
-                                        <td align="center">NOMBRE CLIENTE</td>
-                                        <td align="center">MODELO</td>
-                                        <td align="center">PLACAS</td>
-                                        <td align="center"><i class="fa fa-cogs"></i></td>
+                                        <td align="center"><i class="fa fa-credit-card"></i></td>
+                                        <td align="center"><i class="fa fa-id-badge"></i></td>
                                         <td align="center"><i class="fa fa-user"></i></td>
-                                        <td align="center">POST ID</i></td>
+                                        <td align="center"><i class="fa fa-car"></i></td>
+                                        <td align="center">PLACAS</td>
+                                        <td align="center"><i class="fa fa-edit"></td>
+                                        <td align="center"><i class="fa fa-user"></i></td>
+                                        <td align="center"><i class="fa fa-tasks"></i></td>
+                                        <td align="center"><i class="fa fa-print"></td>
                                     </tr>
 
                                     <?php
@@ -337,7 +316,8 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                             <td><?php echo $dato->placas_coche; ?></td>
                                             <td><a href="config/editar_ordenform.php?id=<?php echo $dato->id_sg; ?>">Actualizar</a></td>
                                             <td><a href="config/eliminar_orden.php?id=<?php echo $dato->id_sg; ?>">Eliminar</a></td>
-                                            <td><a href="#<?php echo $dato->id_sg; ?>">Buscar</a></td>
+                                            <td><a href="progress.php?id=<?php echo $dato->id_sg; ?>">Estatus</a></td>
+                                            <td><a href="config/imprimir_orden.php?id=<?php echo $dato->id_sg; ?>">Imprimir</a></td>
                                         </tr>
                                     <?php
                                     }
@@ -454,16 +434,32 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
                     <!--FIN VENTANA CHAT DIALOGFLOW CON MICRO -->
 
+                    <!-- VENTANA PARA CONFIGURACIÓN  -->
+
+                    <div id=Config modally-max_width="250" class="registro" id="color2">
+                        <form action="#" method="post">
+                            <h2 style="display: block; margin: 0 auto;">Configración</h2><br><br>
+                            <p>Ups!, lo sentimos la opcción de configuración saldra en una versión más nueva, en una proxima actualización
+                                incluiremos en esta ventana: Temas, idiaomas, tipografias, entre otros.
+                            </p>
+
+                        </form>
+
+                    </div>
+
+                    <!-- FIN VENTANA PARA CONFIGURACIÓN  -->
+
                     <!-- VENTANA PARA LOS WARNINGS -->
 
-                    <!-- <div id="dolorr">
-                                        <h1 class="modal-title" modally-max_width="250">You still here?!</h1>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Yes I am this lazy.</p>
-                    
-                                        <div class="button-wrap">
-                                            <a class="button small modally-close">Close me!</a><a href="#dolor" target="_modal:open" class="button gradient small">Open 3rd one!</a>
-                                        </div>
-                                    </div> -->
+                    <div id="dolorr">
+                        <h1 class="modal-title" modally-max_width="250">You still here?!</h1>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Yes I am this lazy.</p>
+
+                        <div class="button-wrap">
+                            <a class="button small modally-close">Cerrar</a>
+                            <!-- <a href="#dolor" target="_modal:open" class="button gradient small">Open 3rd one!</a> -->
+                        </div>
+                    </div>
 
                     <!-- FIN VENTANA PARA LOS WARNINGS -->
 
@@ -495,69 +491,6 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                         Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
                     <p class="banner-btn"><a href="#">Contact US</a></p>
-                </div>
-            </div>
-
-            <!-- CUARTA SECCIÓN  -->
-
-            <div class="sigle-banner">
-                <div class="img4">
-                    <!-- <h2>jaja</h2> -->
-                </div>
-                <div class="banner-text">
-                    <h2>Ordenes SG</h2>
-                    <div class="process-wrapper">
-                        <div id="progress-bar-container">
-                            <ul>
-                                <li class="step step01 active">
-                                    <div class="step-inner">HOME WORK</div>
-                                </li>
-                                <li class="step step02">
-                                    <div class="step-inner">RESPONSIVE</div>
-                                </li>
-                                <li class="step step03">
-                                    <div class="step-inner">CREATIVE</div>
-                                </li>
-                                <li class="step step04">
-                                    <div class="step-inner">TESTIMONIALS</div>
-                                </li>
-                                <li class="step step05">
-                                    <div class="step-inner">OUR LOCATIONS</div>
-                                </li>
-                            </ul>
-
-                            <div id="line">
-                                <div id="line-progress"></div>
-                            </div>
-                        </div>
-
-                        <div id="progress-content-section">
-                            <div class="section-content discovery active">
-                                <h2>HOME SECTION</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
-                            </div>
-
-                            <div class="section-content strategy">
-                                <h2>GALLERY SECTION</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
-                            </div>
-
-                            <div class="section-content creative">
-                                <h2>Creative CREATIONS</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
-                            </div>
-
-                            <div class="section-content production">
-                                <h2>TESTIMONIALS NOW</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
-                            </div>
-
-                            <div class="section-content analysis">
-                                <h2>OUR LOCATIONS</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -597,10 +530,10 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
 <footer>
     <div class="social-bar">
-        <a href="https://www.facebook.com/CASnCS/" class="icon icon-facebook" target="_blank"></a>
-        <a href="http://m.me/CASnCS" class="icon icon-twitter" target="_blank"></a>
-        <a href="https://www.youtube.com/c/devcodela" class="icon icon-youtube" target="_blank"></a>
-        <a href="https://www.instagram.com/bit_tecnologia_81b/" class="icon icon-instagram" target="_blank"></a>
+        <a href="https://www.facebook.com/CASnCS" class="icon icon-facebook" target="_blank"></a>
+        <a href="http://m.me/CASnCS/" class="icon fa fa-comment" target="_blank"></a>
+        <a href="https://www.youtube.com" class="icon icon-youtube" target="_blank"></a>
+        <a href="https://web.whatsapp.com" class="icon fa fa-whatsapp" target="_blank">
     </div>
 </footer>
 
@@ -629,6 +562,8 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         $('#Ordenes_form').modally(); // CON FIRMA
         $('#reset_pass').modally();
         $('#Warning').modally();
+        $('#Calendario').modally();
+        $('#Config').modally();
     });
 </script>
 
@@ -719,93 +654,6 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 <df-messenger intent="WELCOME" chat-title="C&CS" agent-id="9c7656be-7921-441f-b4c9-408a4646b170" chat-icon="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/Icons/chatbot.png" language-code="es"></df-messenger>
 
 <!-- FIN SCRIPT PARA EL CHATBOT -->
-
-<!-- SCRIPT PARA GENERAR PDF EN EL FORMULARIO DE CLIENTES -->
-
-<script>
-    function loadImage(url) {
-        /*Funcion para leer la imagen que usaremos como plantilla en el PDF*/
-        return new Promise(resolve => {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.responseType = "blob";
-            xhr.onload = function(e) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const res = event.target.result;
-                    resolve(res);
-                }
-                const file = this.response;
-                reader.readAsDataURL(file);
-            }
-            xhr.send();
-        });
-    }
-
-    let signaturePad = null; /*Iniciar el campo de firma en blanco */
-
-    window.addEventListener('load', async () => {
-        /*Evento para seleccionar y sacar los datos ingresados por el usuario */
-
-        const canvas = document.querySelector("canvas");
-        canvas.height = canvas.offsetHeight;
-        canvas.width = canvas.offsetWidth;
-
-        signaturePad = new SignaturePad(canvas, {});
-
-        const form = document.querySelector('#form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            let curso = document.getElementById('curso').value;
-            let empresa = document.getElementById('empresa').value;
-            let nombres = document.getElementById('nombre').value;
-            let apellidos = document.getElementById('apellido').value;
-            let email = document.getElementById('email').value;
-            let direccion = document.getElementById('direccion').value;
-            let telefono = document.getElementById('telefono').value;
-            generatePDF(curso, empresa, nombres, apellidos, email, direccion, telefono);
-        })
-
-    });
-
-    async function generatePDF(curso, empresa, nombres, apellidos, email, direccion, telefono) {
-        /*Mandar los datos obtenidos al PDF */
-        const image = await loadImage("assets/forms/ejemplo.jpg"); /*Cargar la imagen */
-        const signatureImage = signaturePad.toDataURL(); /*Obtener la firma como imagen */
-
-        const pdf = new jsPDF('p', 'pt', 'letter');
-
-        /*Agregar la imagen de firma al PDF */
-        pdf.addImage(image, 'PNG', 0, 0, 565, 792);
-        pdf.addImage(signatureImage, 'PNG', 200, 700, 200, 60);
-
-        pdf.setFontSize(22); /*Tamaño de letra */
-        pdf.text(curso, 260, 100);
-
-        const date = new Date(); /*Sacar la fecha */
-        pdf.text(date.getUTCDate().toString(), 235, 30);
-        pdf.text((date.getUTCMonth() + 1).toString(), 275, 30);
-        pdf.text(date.getUTCFullYear().toString(), 320, 30);
-
-        pdf.setFontSize(22); /*Tamaño de la letra */
-        /*Acomodo de los datos obtenidos por el formulario*/
-        pdf.text(nombres, 260, 170); /* (lados, alto) */
-        pdf.text(empresa, 260, 310)
-        pdf.text(apellidos, 260, 240);
-        pdf.text(direccion, 260, 380);
-        pdf.text(telefono, 260, 450);
-        pdf.text(email, 260, 520);
-
-        pdf.setFillColor(0, 0, 0);
-
-
-        pdf.save("example.pdf"); /*Guardar el PDF */
-
-    }
-</script>
-
-<!-- FIN SCRIPT PARA GENERAR PDF EN EL FORMULARIO DE CLIENTES -->
 
 </html>
 
@@ -1150,14 +998,17 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         cursor: pointer;
     }
 
+
     .fa {
         display: inline-block;
-        font: normal normal normal 29px/1 FontAwesome;
-        font-size: 27px;
+        font: normal normal normal 29 px /1 FontAwesome;
+        font-size: 19px;
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         cursor: pointer;
+        padding: 5px 1px 0px;
+        /* height: 9px; */
     }
 
     .menu-item .expander {
@@ -1272,12 +1123,35 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         /* padding-right: 1rem; poner esto en min with  */
         display: flex;
         transition: all .5s;
+        background: #ffffff38;
+    }
+
+    .fa-comment {
+        display: inline-block;
+        font: normal normal normal 29px /1 FontAwesome;
+        font-size: 14px;
+        text-rendering: auto;
+        -moz-osx-font-smoothing: grayscale;
+        cursor: pointer;
+        /* height: 0px; */
+    }
+
+    .fa-whatsapp {
+        display: inline-block;
+        font: normal normal normal 29px /1 FontAwesome;
+        font-size: 16px;
+        text-rendering: auto;
+        -moz-osx-font-smoothing: grayscale;
+        cursor: pointer;
+        /* height: 0px; */
     }
 
     .icon-facebook,
     .icon-twitter,
     .icon-youtube,
-    .icon-instagram {
+    .icon-instagram,
+    .icon-whatsapp,
+    .icon-comment {
         background: #ffffff38;
         /* color: black; */
     }
@@ -1298,6 +1172,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         color: crimson;
         text-decoration: none;
         box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.42);
+        background: #ffffff38;
     }
 
     @font-face {
@@ -1334,11 +1209,11 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         content: "\ea90";
     }
 
-    .icon-instagram:before {
+    .icon-whatsapp:before {
         content: "\ea92";
     }
 
-    .icon-twitter:before {
+    .icon-comment:before {
         content: "\ea96";
     }
 
