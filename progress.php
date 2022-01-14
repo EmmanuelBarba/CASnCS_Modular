@@ -93,15 +93,13 @@ $orden = $consulta->fetch(PDO::FETCH_OBJ);
 			<div id="progress-content-section">
 				<div class="section-content discovery active">
 					<?php echo "<h2>$orden->modelo_coche</h2>" ?><br>
-					<p>Esta orden de servicio ha sido registrada en la base de datos para dar seguimiento con la reparación o mantenimiento,
-						con la información del registro en la recepción, Las órdenes de servicio se generan desde los módulos gestión de llamadas, Planificación de servicio y
-						conceptos e Infor LN Proyecto. Aunque las órdenes de servicio también se pueden crear manualmente. Si es necesario,
-						puede crear la orden de servicio a partir del portal, en esta sección debes preparar la autorización del mantenimiento o revisión.</p>
+					<?php echo "<p>Número de orden: $orden->id_sg</p> <p>Fecha de registro: $orden->fecha_orden</p> <p>Número de cliente: $orden->client_hasorden</p> <p>Observaciones: $orden->observaciones_coche</p> <p>Estatus: $orden->estatus</p>" ?>
 				</div>
 
 				<div class="section-content strategy">
-					<?php echo "<h2>$orden->modelo_coche</h2>" ?><br>
-					<p>El vehiculo ha pasado por el registro principal del sistema y se encuentra a la espera de
+					<?php echo "<h2>$orden->modelo_coche</h2> " ?><br>
+					<?php echo "<p>Descripción de la falla: $orden->falla_coche</p>" ?>
+					<p>Info: El vehiculo ha pasado por el registro principal del sistema y se encuentra a la espera de
 						un mecánico para el proceso de revisión, las revisiones pueden demorar para realizarse segun la carga de trabajo
 						de la empresa.
 					</p>
@@ -109,19 +107,22 @@ $orden = $consulta->fetch(PDO::FETCH_OBJ);
 
 				<div class="section-content creative"><br>
 					<?php echo "<h2>$orden->modelo_coche</h2>" ?><br>
+					<?php echo "<p>Número de orden: $orden->id_sg</p> <p>Número de cliente: $orden->client_hasorden</p> <p>Por reparar fallas: $orden->falla_coche</p>" ?>
 					<p>En esta etapa aun no se tiene información del servicio, debido a que el vehiculo
-						aún no ha sido revisado, hacer el chequeo de la orden pede ayudar a mejorar el estatus...(Aqui hacer la consulta del fallo del vehiculo).
+						aún no ha sido revisado, hacer el chequeo de la orden pede ayudar a mejorar el estatus.
 					</p>
+					<?php echo "<p>Estatus: $orden->estatus</p>" ?>
 				</div>
 
 				<div class="section-content production">
 					<?php echo "<h2>$orden->modelo_coche</h2>" ?><br>
-					<p>(Aqui consultar el estatus del proceso de la orden de servicio).</p>
+					<?php echo "<p>Mantenimiento realizado: $orden->estado_orden</p>" ?>
 				</div>
 
 				<div class="section-content analysis">
 					<?php echo "<h2>$orden->modelo_coche</h2>" ?><br>
-					<p>(Aqui consultar el reporte final de la reparación).</p>
+					<?php echo "<p>Informe técnico: $orden->informe_tecnico</p>" ?>
+					<?php echo "<p>Mantenimiento realizado: $orden->estatus</p>" ?>
 				</div>
 			</div>
 
@@ -181,6 +182,8 @@ $orden = $consulta->fetch(PDO::FETCH_OBJ);
 
 <style>
 	body {
+		/* overflow-x: scroll;
+		overflow-x: scroll; */
 		margin: 0;
 		font-family: 'Roboto Condensed', sans-serif;
 	}

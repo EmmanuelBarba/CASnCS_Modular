@@ -70,11 +70,15 @@ if (isset($_POST['enviar_orden'])) { //revisar nombre del boton
             ':informe_tecnico'      => "Aún sin reparar",
             ':estatus'              => "En Espera"
         ));
-        // echo $id_nom_client;
-        // echo "<b><h3>Conexion exitosa</h3></b>";
-        // header("Location: config/404.php");
+        echo '<script type="text/javascript">
+                alert("Los datos fuerón guardados con exito.");
+                window.location.href="acceso_cas.php";
+            </script>';
     } else {
         // $error = "";
-        echo "<b><h3>Conexion no exitosa</h3></b>";
+        // echo '<script type="text/javascript">
+        //         alert("El cliente no existe.");
+        //         window.location.href="acceso_cas.php";
+        //     </script>';
     }
 }

@@ -62,13 +62,12 @@ if(isset($_POST['enviar'])){//revisar nombre del boton
             ':taller_hasclient' => $id_taller,
             ':type' => "user"
         ));
-        // echo $taller;
-        // echo "<b><h3>Conexion exitosa</h3></b>";
-        // header("Location: config/404.php");
+        echo '<script type="text/javascript">
+                alert("Los datos fuerón guardados con exito.");
+                window.location.href="acceso_cas.php";
+            </script>';
     } else {
         // $error = "";
         echo "<b><h3>Conexion no exitosa</h3></b>";
     }
 }
-
-?>

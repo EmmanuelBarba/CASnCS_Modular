@@ -37,6 +37,9 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     <script src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/jspdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
     <!--  FIN APLICACIÓN PARA LA FIRMA  -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/CSS/cubeportfolio.min.css" rel="stylesheet">
     <title>C&CS</title>
 </head>
 
@@ -97,7 +100,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                             </div> -->
             <?php echo "<div class='menu-title'>$name</div>"; ?>
 
-            <a href="Tabla_clientes" target="_modal:open">
+            <a href="#Tabla_clientes" target="_modal:open">
                 <div class="menu-item" href="#Tabla_clientes" target="_modal:open">
                     <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle2">
                     <div class="expander">
@@ -124,7 +127,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
             <a href="#Tabla_ordenes" target="_modal:open">
                 <div class="menu-item" href="#Ordenes_form" target="_modal:open">
                     <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle5">
-                    <div class="expander">
+                    <div href="#Tabla_ordenes" target="_modal:open" class="expander">
                         <label for="sneaky_toggle5">
                             <i class="fa fa-clipboard"></i>
                             <span class="menu-text">Ordenes</span>
@@ -132,16 +135,18 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                     </div>
                 </div>
             </a>
-
-            <div class="menu-item">
-                <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle6">
-                <div class="expander">
-                    <label for="sneaky_toggle6">
-                        <i class="fa fa-envelope-open"></i>
-                        <span class="menu-text">Contacto</span>
-                    </label>
+            <!-- <a href="tel:+123655233">+12 365 5233</a> -->
+            <a href="mailto:">
+                <div class="menu-item">
+                    <input type="radio" class="toggle" name="menu_group" id="sneaky-toggle6">
+                    <div class="expander">
+                        <label for="sneaky_toggle6">
+                            <i class="fa fa-envelope-open"></i>
+                            <span class="menu-text">Contacto</span>
+                        </label>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
     <!-- CONTENEDOR PADRE -->
@@ -175,6 +180,13 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                         <div class="button-wrap"><?php echo "<a href='config/logout.php' class='button gradient small'>Logout</a>"; ?></div>
                     </div>
 
+                    <div id="Calendario" modally-max_width="640">
+                        <?php echo "<h1 class='modal-title serif'>Agenda de: $name</h1>"; ?>
+                        <iframe src="https://calendar.google.com/calendar/embed?height=400&wkst=1&bgcolor=%23A79B8E&ctz=America%2FMexico_City&title=C%26CS&showNav=1&showDate=1&showPrint=1&showTabs=1&mode=MONTH&src=Y191ZTdzaTZ0cDN1aDBrZDFiMHJlYnZjbW5iNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZXMubWV4aWNhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23D50000&color=%230B8043" style="border-width:0" width="600" height="400" frameborder="0" scrolling="no"></iframe>
+                        <!-- <p>Los datos fueron insertados correctamente.</p>
+                        <p>- ¡Revisa las tablas! -</p>
+                        <div class="button-wrap"><?php echo "<a href='' class='button gradient small'>Aceptar</a>"; ?></div> -->
+                    </div>
 
                     <!-- TABLA DE CLIENTES -->
 
@@ -184,52 +196,52 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                         </div>
                         <h2 class="title_cliente">Lista de clientes</h2><br>
                         <div class="contenedor-form-tabla">
-                            <center>
+                            <!-- <center>
                                 <div>
                                     <form action="#" method="POST">
                                         <input class="buscar" type="text" name="buscar" id="buscar_css" placeholder="Buscar cliente">
                                         <button class="btn_buscar" type="submit" name="Buscar" value="Buscar">Buscar</button>
                                         <br>
                                     </form><br><br>
-                                </div>
-                                <table class="" border="1">
-                                    <tr>
-                                        <td align="center"><i class="fa fa-id-card"></i></td>
-                                        <td align="center"><i class="fa fa-user"></i></td>
-                                        <td align="center"><i class="fa fa-map"></i></td>
-                                        <td align="center"><i class="fa fa-envelope-open"></i></td>
-                                        <td align="center"><i class="fa fa-phone-square"></i></td>
-                                        <!-- <td>FECHA</td> -->
-                                        <td align="center"><i class="fa fa-car"></i></td>
-                                        <td align="center"><i class="fa fa-edit"></i></td>
-                                        <td align="center"><i class="fa fa-trash"></i></td>
-                                        <td align="center"><i class="fa fa-print"></td>
-                                        <!-- <td>CONTRASEÑA</td> -->
-                                        <!-- <td>TIPO DE USUARIO</td> -->
-                                    </tr>
+                                </div> -->
+                            <table class="" border="1">
+                                <tr>
+                                    <td align="center"><i class="fa fa-id-card"></i></td>
+                                    <td align="center"><i class="fa fa-user"></i></td>
+                                    <td align="center"><i class="fa fa-map"></i></td>
+                                    <td align="center"><i class="fa fa-envelope-open"></i></td>
+                                    <td align="center"><i class="fa fa-phone-square"></i></td>
+                                    <!-- <td>FECHA</td> -->
+                                    <td align="center"><i class="fa fa-car"></i></td>
+                                    <td align="center"><i class="fa fa-edit"></i></td>
+                                    <td align="center"><i class="fa fa-trash"></i></td>
+                                    <td align="center"><i class="fa fa-print"></td>
+                                    <!-- <td>CONTRASEÑA</td> -->
+                                    <!-- <td>TIPO DE USUARIO</td> -->
+                                </tr>
 
-                                    <?php foreach ($clientes as $dato) { ?>
-                                        <tr>
-                                            <td><?php echo $dato->id_clientes; ?></td>
-                                            <td><?php echo $dato->nombre_cliente; ?></td>
-                                            <td><?php echo $dato->domicilio_cliente; ?></td>
-                                            <td><?php echo $dato->correo_cliente; ?></td>
-                                            <td><?php echo $dato->tel_cliente; ?></td>
-                                            <!-- <td><?php //echo $dato->date_cliente; 
-                                                        ?></td> -->
-                                            <td><?php echo $dato->taller_hasclient; ?></td>
-                                            <!-- <td> -->
-                                            <?php //echo $dato->pass_client; 
-                                            ?>
-                                            <!-- </td> -->
-                                            <!-- <td><?php // $dato->type; 
-                                                        ?></td> -->
-                                            <td><a href="config/editar_clientes.php?id=<?php echo $dato->id_clientes; ?>">Editar</a></td>
-                                            <td><a href="config/eliminar_cliente.php?id=<?php echo $dato->id_clientes; ?>">Eliminar</a></td>
-                                            <td><a href="config/imprimir_cliente.php?id=<?php echo $dato->id_clientes; ?>">Imprimir</a></td>
-                                        </tr>
-                                    <?php } ?>
-                                </table>
+                                <?php foreach ($clientes as $dato) { ?>
+                                    <tr>
+                                        <td><?php echo $dato->id_clientes; ?></td>
+                                        <td><?php echo $dato->nombre_cliente; ?></td>
+                                        <td><?php echo $dato->domicilio_cliente; ?></td>
+                                        <td><?php echo $dato->correo_cliente; ?></td>
+                                        <td><?php echo $dato->tel_cliente; ?></td>
+                                        <!-- <td><?php //echo $dato->date_cliente; 
+                                                    ?></td> -->
+                                        <td><?php echo $dato->taller_hasclient; ?></td>
+                                        <!-- <td> -->
+                                        <?php //echo $dato->pass_client; 
+                                        ?>
+                                        <!-- </td> -->
+                                        <!-- <td><?php // $dato->type; 
+                                                    ?></td> -->
+                                        <td><a href="config/editar_clientes.php?id=<?php echo $dato->id_clientes; ?>">Editar</a></td>
+                                        <td><a href="config/eliminar_cliente.php?id=<?php echo $dato->id_clientes; ?>">Eliminar</a></td>
+                                        <td><a href="config/imprimir_cliente.php?id=<?php echo $dato->id_clientes; ?>">Imprimir</a></td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
                             </center>
                         </div>
                     </div>
@@ -269,7 +281,10 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                 <input type="text" name="pass_client" class="form-control" id="pass_client" placeholder="Contraseña cliente" required>
                             </div>
                             <br>
-                            <td colspan="2"><button class="btn btn-primary" type="submit" name="enviar">Guardar</button></td>
+                            <td colspan="2">
+                                <!-- <a href="#lorem" button class="btn btn-primary" type="submit" name="enviar">Enviar</a> -->
+                            <td colspan="2"><button a href="#lorem" class="btn btn-primary" type="submit" name="enviar">Guardar</button></td>
+                            </td>
                         </form>
                         <!-- </div> -->
                     </section>
@@ -285,13 +300,13 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                         <h2 class="title_cliente">Ordenes SG</h2><br>
                         <div class="contenedor-form-tabla">
                             <center>
-                                <div>
+                                <!-- <div>
                                     <form action="#" method="POST">
                                         <input class="buscar" type="text" name="buscar" id="buscar_css" placeholder="Buscar cliente">
                                         <button class="btn_buscar" type="submit" name="Buscar" value="Buscar">Buscar</button>
                                         <br>
                                     </form><br><br>
-                                </div>
+                                </div> -->
                                 <table border="1">
                                     <tr>
                                         <td align="center"><i class="fa fa-credit-card"></i></td>
@@ -355,7 +370,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                                 </select>
                             </div> -->
 
-                            <!-- Fin de option para lista de los clienteslos clientes  -->
+                            <!-- Fin de option para lista de los  clientes  -->
 
                             <div>
                                 <label for="id_orden" class="form-label">ID cliente:</label>
@@ -437,7 +452,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                     <!-- VENTANA PARA CONFIGURACIÓN  -->
 
                     <div id=Config modally-max_width="250" class="registro" id="color2">
-                        <form action="#" method="post">
+                        <form action="#" method="post">o
                             <h2 style="display: block; margin: 0 auto;">Configración</h2><br><br>
                             <p>Ups!, lo sentimos la opcción de configuración saldra en una versión más nueva, en una proxima actualización
                                 incluiremos en esta ventana: Temas, idiaomas, tipografias, entre otros.
@@ -451,15 +466,15 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
                     <!-- VENTANA PARA LOS WARNINGS -->
 
-                    <div id="dolorr">
+                    <!-- <div id="Warning">
                         <h1 class="modal-title" modally-max_width="250">You still here?!</h1>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Yes I am this lazy.</p>
 
                         <div class="button-wrap">
                             <a class="button small modally-close">Cerrar</a>
-                            <!-- <a href="#dolor" target="_modal:open" class="button gradient small">Open 3rd one!</a> -->
-                        </div>
-                    </div>
+                            <a href="#dolor" target="_modal:open" class="button gradient small">Open 3rd one!</a>
+                </div>
+            </div> -->
 
                     <!-- FIN VENTANA PARA LOS WARNINGS -->
 
@@ -473,10 +488,11 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
                     <!-- <h2>jaja</h2> -->
                 </div>
                 <div class="banner-text">
-                    <h2>¿Quienes somos?</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
-                    <p class="banner-btn"><a href="#">Contact US</a></p>
+                    <h2>¿Quiénes somos?</h2><br><br>
+                    <p>CAS & CAR-SERVICE (C&CS), que significa control automotive software y servicio vehicular,
+                        es una plataforma que desempeña un entorno de trabajo favorable en gestión y organización de las empresas que
+                        se dedican a la industria automotriz, optimizando las funciones que desempeñan a los clientes.</p>
+                    <!-- <p class="banner-btn"><a href="#">Contact US</a></p> -->
                 </div>
             </div>
 
@@ -484,13 +500,48 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
             <div class="sigle-banner">
                 <div class="img3">
-                    <!-- <h2>jaja</h2> -->
-                </div>
-                <div class="banner-text">
-                    <h2> Nuestros Servicios</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
-                    <p class="banner-btn"><a href="#">Contact US</a></p>
+                    <center>
+                        <!-- <div class="banner-text"> -->
+                        <div id="container">
+                            <div class="box">
+                                <h1>Nuestros Servicios</h1>
+                                <div class="cards">
+                                    <article class="card">
+                                        <div class="icons">
+                                            <i class="fa fa-cogs"></i>
+                                        </div>
+                                        <div class="card-content">
+                                            <h2>Mecánica General</h2>
+                                            <p>Mantenimiento de las piezas mecánicas de un vehículo para su funcionamiento óptimo,se
+                                                detecta el mal funcionamiento o ruido anormal por ej. guayas, bombas, accesorios, etc.</p>
+                                        </div>
+                                    </article>
+                                    <article class="card">
+                                        <div class="icons">
+                                            <i class="fa fa-wrench"></i>
+                                        </div>
+                                        <div class="card-content">
+                                            <h2>Afinación</h2>
+                                            <p>Alargamos la vida del motor de su automóvil con el funcionamiento y desempeño
+                                                optimo para su mejor desplazamiento, evitando pasar peores daños, o desgastes.</p>
+                                        </div>
+                                    </article>
+                                    <article class="card">
+                                        <div class="icons">
+                                            <i class="fa fa-cog"></i>
+                                        </div>
+                                        <div class="card-content">
+                                            <h2>Suspensión</h2>
+                                            <p>Manten las ruedas en contacto con el suelo, absorbiendo las vibraciones,
+                                                y movimiento provocados por las ruedas en el desplazamiento del vehículo,
+                                                para que estos golpes no sean transmitidos al bastidor.</p>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </center>
                 </div>
             </div>
 
@@ -498,27 +549,69 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
             <div class="sigle-banner">
                 <div class="img5">
-                    <!-- <h2>jaja</h2> -->
-                </div>
-                <div class="banner-text">
-                    <h2>Ordenes SG</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
-                    <p class="banner-btn"><a href="#">Contact US</a></p>
-                </div>
-            </div>
+                    <center>
+                        <h2>Galería</h2><br><br><br><br>
+                        <section id="portfolio">
+                            <div class="container">
+                                <br><br>
+                                <div class="row align-items-lg-center">
+                                    <div class="col-lg-12">
+                                        <div id="js-grid-mosaic-flat" class="cbp cbp-l-grid-mosaic-flat">
+                                            <div class="cbp-item">
+                                                <a href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/Taller1.jpeg" class="cbp-caption cbp-lightbox">
+                                                    <div class="cbp-caption-defaultWrap"><br><br>
+                                                        <img src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/Taller1.jpeg" alt="">
+                                                    </div>
+                                                    <div class="cbp-caption-activeWrap">
+                                                        <i class="icon"></i>
+                                                        <div class="port-content">
+                                                            <p class="mb-1 main-color">Elegant Themes</p>
+                                                            <h5>Latest Work</h5>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
 
-            <!-- SEXTA SECCIÓN  -->
 
-            <div class="sigle-banner">
-                <div class="img6">
-                    <!-- <h2>jaja</h2> -->
-                </div>
-                <div class="banner-text">
-                    <h2>Contactanos</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Quibusdam aliquid maxime reprehenderit dolorem incidunt.</p>
-                    <p class="banner-btn"><a href="#">Contact US</a></p>
+
+                                            <div class="cbp-item">
+                                                <a href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/Taller2.jpeg" class="cbp-caption cbp-lightbox">
+                                                    <div class="cbp-caption-defaultWrap"><br><br>
+                                                        <img src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/Taller2.jpeg" alt="">
+                                                    </div>
+                                                    <div class="cbp-caption-activeWrap">
+                                                        <i class="icon"></i>
+                                                        <div class="port-content">
+                                                            <p class="mb-1 main-color">Elegant Themes</p>
+                                                            <h5>Latest Work</h5>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+
+
+
+                                            <div class="cbp-item">
+                                                <a href="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/Taller3.jpeg" class="cbp-caption cbp-lightbox">
+                                                    <div class="cbp-caption-defaultWrap"><br><br>
+                                                        <img src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/Taller3.jpeg" alt="">
+                                                    </div>
+                                                    <div class="cbp-caption-activeWrap">
+                                                        <i class="icon"></i>
+                                                        <div class="port-content">
+                                                            <p class="mb-1 main-color">Elegant Themes</p>
+                                                            <h5>Latest Work</h5>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </center>
                 </div>
             </div>
             <!-- FIN PADRE  -->
@@ -533,7 +626,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         <a href="https://www.facebook.com/CASnCS" class="icon icon-facebook" target="_blank"></a>
         <a href="http://m.me/CASnCS/" class="icon fa fa-comment" target="_blank"></a>
         <a href="https://www.youtube.com" class="icon icon-youtube" target="_blank"></a>
-        <a href="https://web.whatsapp.com" class="icon fa fa-whatsapp" target="_blank">
+        <a href="https://web.whatsapp.com" class="icon fa fa-whatsapp" target="_blank"></a>
     </div>
 </footer>
 
@@ -567,7 +660,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     });
 </script>
 
-<!-- SCRIPT PARA EL EFECtO DE TRANSICIÓN  -->
+<!-- SCRIPT PARA EL EFECTO DE TRANSICIÓN  -->
 
 <Script>
     $('.banner-area').slick({
@@ -607,46 +700,9 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 </script>
 <!-- SCRIPT PARA EL MENU CON MOVIMIENTO LIBRE -->
 
-<!-- SCRIPT PARA LA BARRA DE PROGRESO DE LAS ORDENES -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
-    $(".step").click(function() {
-        $(this).addClass("active").prevAll().addClass("active");
-        $(this).nextAll().removeClass("active");
-    });
-
-    $(".step01").click(function() {
-        $("#line-progress").css("width", "3%");
-        $(".discovery").addClass("active").siblings().removeClass("active");
-    });
-
-    $(".step02").click(function() {
-        $("#line-progress").css("width", "25%");
-        $(".strategy").addClass("active").siblings().removeClass("active");
-    });
-
-    $(".step03").click(function() {
-        $("#line-progress").css("width", "50%");
-        $(".creative").addClass("active").siblings().removeClass("active");
-    });
-
-    $(".step04").click(function() {
-        $("#line-progress").css("width", "75%");
-        $(".production").addClass("active").siblings().removeClass("active");
-    });
-
-    $(".step05").click(function() {
-        $("#line-progress").css("width", "100%");
-        $(".analysis").addClass("active").siblings().removeClass("active");
-    });
-</script>
-<!-- FIN SCRIPT PARA LA BARRA DE PROGRSO DE LAS ORDENES -->
-
-
 <!-- SCRIPT PARA EL CHATBOT -->
-<!-- DIALOGFLOW CON MICRO  -->
 
-<!-- DESHABILITADO POR EL MOMENTO, SE ENCUENTRA EN MESSAGES(MENÚ PRINCIPAL) -->
+<!-- DIALOGFLOW CON MICRO  -->
 
 <!-- DIALOGFLOW CHAT BETA -->
 
@@ -654,6 +710,73 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 <df-messenger intent="WELCOME" chat-title="C&CS" agent-id="9c7656be-7921-441f-b4c9-408a4646b170" chat-icon="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/Icons/chatbot.png" language-code="es"></df-messenger>
 
 <!-- FIN SCRIPT PARA EL CHATBOT -->
+
+<!-- SCRIPTS PARA EL USO DE LAS TARJETAS  -->
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.0.3/tilt.jquery.min.js"></script>
+<script>
+    const tilt = $('.card').tilt({
+        scale: 1.01,
+        glare: true,
+        maxGlare: .5
+    });
+</script>
+
+<!-- SCRIPTS PARA EL USO DE LAS TARJETAS  -->
+
+<!-- SCRIPTS PARA LA GALERÍA  -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+
+<script src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/jquery.fancybox.min.js"></script>
+
+<script src="https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Assets/JS/jquery.cubeportfolio.min.js"></script>
+<script>
+    jQuery(function($) {
+
+
+        "use strict";
+
+        function portfolio() {
+
+            $('#js-grid-mosaic-flat').cubeportfolio({
+                layoutMode: 'mosaic',
+                sortByDimension: true,
+                mediaQueries: [{
+                    width: 800,
+                    cols: 3,
+                }, {
+                    width: 767,
+                    cols: 2,
+                }, {
+                    width: 480,
+                    cols: 1,
+                }],
+                gapHorizontal: 15,
+                gapVertical: 15,
+                gridAdjustment: 'responsive',
+                caption: 'zoom',
+
+                // lightbox
+                lightboxDelegate: '.cbp-lightbox',
+                lightboxGallery: true,
+                lightboxTitleSrc: 'data-title',
+            });
+        }
+
+        $(document).ready(function() {
+
+            setTimeout(function() {
+                portfolio();
+            }, 1000);
+
+        });
+
+    });
+</script>
+
+<!-- FIN SCRIPT PARA LA GALERÍA -->
 
 </html>
 
@@ -713,8 +836,8 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         max-height: 445px;
         min-width: 200px;
         min-height: 120px;
-        z-index: 1;
-        /* position: sticky; */
+        z-index: 0;
+        position: sticky;
         display: block;
         margin: auto;
     }
@@ -727,7 +850,8 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 
     .img1 {
-        background-image: linear-gradient(to top, rgb(15, 0, 0) 0%, hsla(0, 0%, 100%, 0.36) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(17).webp");
+        background-image: linear-gradient(to top, rgb(15, 0, 0) 10%, hsla(0, 0%, 100%, 0.36) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(28).webp");
+        /* background-image: linear-gradient(to top, rgb(15, 0, 0) 10%, hsla(0, 100%, 50%, 0.65) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(29).webp"); */
         /* background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.amazonaws.com/Images+modular/Images+CAS/img+(28).webp"); */
         background-size: cover;
         background-attachment: fixed;
@@ -743,7 +867,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 
     .img3 {
-        background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(9).webp");
+        background-image: linear-gradient(to top, rgb(0 0 0) 0%, hsl(0deg 0% 26% / 70%) 100%), url("https://mod2021cas.s3.us-west-1.amazonaws.com/C%26CS/Images/Fondos/img+(27).webp");
         background-size: cover;
         background-attachment: fixed;
         height: 100vh;
@@ -897,6 +1021,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
     .banner-text p {
         color: #fff;
+        font-size: 18px;
     }
 
     .banner-btn a {
@@ -1117,7 +1242,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 
     .icon {
-        color: black;
+        color: #fff;
         text-decoration: none;
         padding: .7rem;
         /* padding-right: 1rem; poner esto en min with  */
@@ -1129,20 +1254,33 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     .fa-comment {
         display: inline-block;
         font: normal normal normal 29px /1 FontAwesome;
-        font-size: 14px;
+        font-size: 10px;
         text-rendering: auto;
         -moz-osx-font-smoothing: grayscale;
         cursor: pointer;
         /* height: 0px; */
+        /* color: black; */
     }
+
+    /* td a:link,
+    a:visited {
+        background-color: #ffffff00;
+        color: black;
+        border: 2px solid crimson;
+        padding: 4px 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    } */
 
     .fa-whatsapp {
         display: inline-block;
         font: normal normal normal 29px /1 FontAwesome;
-        font-size: 16px;
+        font-size: 12px;
         text-rendering: auto;
         -moz-osx-font-smoothing: grayscale;
         cursor: pointer;
+        /* color: black; */
         /* height: 0px; */
     }
 
@@ -1172,7 +1310,6 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         color: crimson;
         text-decoration: none;
         box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.42);
-        background: #ffffff38;
     }
 
     @font-face {
@@ -1207,18 +1344,22 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
     .icon-facebook:before {
         content: "\ea90";
+        /* color: black; */
     }
 
     .icon-whatsapp:before {
         content: "\ea92";
+        /* color: black; */
     }
 
     .icon-comment:before {
         content: "\ea96";
+        /* color: black; */
     }
 
     .icon-youtube:before {
         content: "\ea9d";
+        /* color: black; */
     }
 
     #fp-nav ul li a span,
@@ -1276,6 +1417,8 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
 
 <!-- ESTILO DEL WAVE  -->
 
+<!-- ESTILO DEL WAVE  -->
+
 <style>
     .wave {
         opacity: 0.45;
@@ -1285,7 +1428,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         width: 6000px;
         height: 6000px;
         background: rgba(0, 0, 0, 0.8);
-        background: crimson;
+        /* background: crimson; */
         margin-left: -2650px;
         transform-origin: 50% 50%;
         border-radius: 45%;
@@ -1397,7 +1540,7 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
         top: 61%;
         left: 50%;
         transform: translate(-50%, -50%);
-        filter: drop-shadow(3px 3px 3px #dc143c69);
+        filter: drop-shadow(3px 5px 3px #000);
     }
 
     .line {
@@ -2079,3 +2222,135 @@ $select_cliente = $consulta->fetchAll(PDO::FETCH_OBJ);
     }
 </style>
 <!-- FIN ESTILO PARA ELFORMULARIO DE CLIENTE -->
+
+<!-- ESTILO PARA LAS TARJETAS DE NUESTROS SERVICIOS -->
+
+<style>
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .box {
+        width: 100%;
+        max-width: 1170px;
+        padding: 15px;
+    }
+
+    .box h1 {
+        margin: 30px 0;
+        color: #ddd;
+        font-size: 35px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        text-align: center;
+        /* margin: 0 auto; */
+    }
+
+    .card {
+        width: 30%;
+        padding: 30px 20px;
+        border-radius: 3px;
+        transition: transform .3s;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(30px);
+    }
+
+    .card-content {
+        color: #fff;
+    }
+
+    .card-content h2 {
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .card-content p {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    .icons {
+        background: #ddd;
+        display: inline-block;
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+        margin-bottom: 20px;
+    }
+
+    .icons i {
+        text-align: center;
+        line-height: 75px;
+        padding: 0px 25px;
+        font-size: 35px;
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        #container {
+            height: auto;
+        }
+
+        .box {
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .box h1 {
+            font-size: 1.5rem
+        }
+
+        .cards {
+            justify-content: center;
+        }
+
+        .card {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- FIN ESTILO PARA LAS TARJETAS DE NUESTROS SERVICIOS -->
+
+<!-- ESTILO PARA LA GALERIA -->
+
+<style>
+    #js-grid-mosaic-flat {
+        min-height: 600px;
+    }
+
+
+    #js-grid-mosaic-flat.cbp-caption-zoom .cbp-caption-actionWrap {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        bottom: 10px;
+        height: auto;
+        width: auto;
+        background-color: #ffffffd9;
+    }
+
+    .cbp-l-grid-mosaic-flat .cbp-caption-activeWrap {
+        background-color: crimson;
+        background-color: rgba(220, 20, 60, 0.85);
+    }
+</style>
